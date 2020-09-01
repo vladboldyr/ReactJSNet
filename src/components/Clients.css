@@ -16,6 +16,10 @@
     color: #26a69a;
 }
 
+.buttonPlus {
+  color: #26a69a;
+}
+
 .input-field.suffix input,
 .input-field.suffix textarea {
     margin-right: 3rem;
