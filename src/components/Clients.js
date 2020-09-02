@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import {ListClients} from "./ListClients";
+import {Form} from "./Form";
 import './Clients.css';
 
 export const Clients = () => {
@@ -17,9 +18,10 @@ export const Clients = () => {
                             <input id="icon_search" type="text" className="validate"/>
                             <label htmlFor="icon_search">Введи имя</label>
                         </div>
-                        <a className="btn-floating btn-small waves-effect waves-light buttonPlus"><i className="material-icons">add</i></a>
+                        <button data-target="modalAddClient" className="btn-floating btn-small waves-effect waves-light buttonPlus"><i className="material-icons">add</i></button>
                     </div>
                 </form>
+                <Form modalAddClient="modalAddClient"/>
             </div>
             <ListClients clients={clients}/>
         </div>
