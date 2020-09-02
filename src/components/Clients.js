@@ -12,12 +12,12 @@ export const Clients = () => {
             <div className="row">
                 <form>
                     <div className="row" style={{marginLeft:'20px'}}>
-                        <div className="input-field  suffix col s2">
-                            <i className="material-icons">search</i>
+                        <div className="input-field suffix col s2">
+                            <i className="material-icons prefix">search</i>
                             <input id="icon_search" type="text" className="validate"/>
-                            <label htmlFor="icon_search">Enter Name</label>
+                            <label htmlFor="icon_search">Введи имя</label>
                         </div>
-                        <a className="btn-floating btn-small waves-effect waves-light buttonPlus" style={{marginTop:"13px"}}><i className="material-icons">add</i></a>
+                        <a className="btn-floating btn-small waves-effect waves-light buttonPlus"><i className="material-icons">add</i></a>
                     </div>
                 </form>
             </div>

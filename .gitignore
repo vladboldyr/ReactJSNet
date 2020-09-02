@@ -17,6 +17,9 @@
 .idea/
 *.sln.iml
 
+#package-lock
+package-lock.json
+
 # Mono auto generated files
 mono_crash.*
 

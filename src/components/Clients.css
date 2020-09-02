@@ -8,23 +8,23 @@
     width: 3rem;
     font-size: 2rem;
     transition: color .2s;
-    top: 0px;
+    top: 1rem;
     left: 0px;
 }
 
-.input-field.suffix i.active {
-    color: #26a69a;
-}
+
 
 .buttonPlus {
   color: #26a69a;
+  margin-left: 3rem;
+  margin-top: 1.5rem;
 }
+
+
 
 .input-field.suffix input,
 .input-field.suffix textarea {
-    margin-right: 3rem;
-    width: 92%;
-    width: calc(100% - 3rem);
+    margin-left: 2.5rem;
 }
 
 .input-field.suffix textarea {
@@ -32,7 +32,7 @@
 }
 
 .input-field.suffix label {
-    margin-right: 3rem;
+      margin-left: 2.5rem;
 }
 
 @media only screen and (max-width: 992px) {
