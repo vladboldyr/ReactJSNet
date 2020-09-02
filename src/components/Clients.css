@@ -9,7 +9,7 @@
     font-size: 2rem;
     transition: color .2s;
     top: 0px;
-    right: 0px;
+    left: 0px;
 }
 
 .input-field.suffix i.active {

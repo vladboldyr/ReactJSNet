@@ -15,7 +15,7 @@ export const Clients = () => {
                         <div className="input-field  suffix col s2">
                             <i className="material-icons">search</i>
                             <input id="icon_search" type="text" className="validate"/>
-                            <label form="icon_search">Enter Name</label>
+                            <label htmlFor="icon_search">Enter Name</label>
                         </div>
                         <a className="btn-floating btn-small waves-effect waves-light buttonPlus" style={{marginTop:"13px"}}><i className="material-icons">add</i></a>
                     </div>
