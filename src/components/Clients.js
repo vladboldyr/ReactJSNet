@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import {ListClients} from "./ListClients";
-import {Form} from "./Form";
+import Modal from "./Modal";
 import './Clients.css';
 
 export const Clients = () => {
@@ -18,7 +18,7 @@ export const Clients = () => {
                             <input id="icon_search" type="text" className="validate"/>
                             <label htmlFor="icon_search">Введи имя</label>
                         </div>
-                        <Form/>
+                        <Modal/>
                     </div>
                 </form>
             </div>
