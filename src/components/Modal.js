@@ -19,7 +19,11 @@ class Modal extends Component {
             timeIntervals: 15,
             startDate : new Date(),
             selectedZone: "Выберите зону",
-            zoneList : ["Подмыхи","Руки","Ноги"]
+            zoneList : ["Подмыхи","Руки","Ноги"],
+            nameClient: "",
+            numberPhon: "",
+            zoneSelected: [],
+            instanceFormSelect : null
         }
         this.setStartDate = this.setStartDate.bind(this);
         this.generationExcludeTimes = this.generationExcludeTimes.bind(this);
@@ -27,12 +31,28 @@ class Modal extends Component {
 
   setStartDate(date) {
    this.setState({startDate : date});
-  };
+  }
 
   generationExcludeTimes(times) {
       return times.map(time => {
           return setHours(setMinutes(new Date(), time.minutes), time.hour);
       });
+  }
+
+  closeModalSave() {
+    console.log("Save");
+    const values = this.state.instanceFormSelect.getSelectedValues();
+    this.setState((state) => {
+      return {zoneSelected : state.zoneSelected.concat(values),}
+    });
+  }
+
+  onChangeName(e) {
+    this.setState({nameClient : e.target.value});
+  }
+
+  onChangePhone(e) {
+    this.setState({numberPhon : e.target.value});
   }
 
   componentDidMount() {
@@ -42,12 +62,14 @@ class Modal extends Component {
        },
        onOpenEnd: () => {
          console.log("Open End");
+         
        },
        onCloseStart: () => {
          console.log("Close Start");
        },
        onCloseEnd: () => {
          console.log("Close End");
+         console.group(this.state.zoneSelected,this.state.nameClient,this.state.numberPhon,this.state.startDate);
        },
        inDuration: 250,
        outDuration: 250,
@@ -56,14 +78,11 @@ class Modal extends Component {
        startingTop: "4%",
        endingTop: "10%"
      };
-     const optionsDropdown = {
-      onOpenStart:() => {
-        console.log("Open Dropdown start");
-      }
-     }
      
      M.FormSelect.init(this.Select,{});
      M.Modal.init(this.Modal, options);
+     this.setState({instanceFormSelect:M.FormSelect.getInstance(this.Select)});
+
   }
   render() {
     return (
@@ -76,12 +95,12 @@ class Modal extends Component {
                   <div className="row">
                     <div className="input-field col s4">
                       <i className="material-icons prefix">account_circle</i>
-                      <input id="icon_prefix" type="text" className="validate"/>
+                      <input id="icon_prefix" type="text" className="validate" onChange={e => this.onChangeName(e)}/>
                       <label htmlFor="icon_prefix">Введите Имя</label>
                     </div>
                     <div className="input-field col s4">
                       <i className="material-icons prefix">phone</i>
-                      <input id="icon_telephone" type="number" className="validate"/>
+                      <input id="icon_telephone" type="number" className="validate" onChange={e => this.onChangePhone(e)}/>
                       <label htmlFor="icon_telephone">Телефон</label>
                     </div>
                     <div className="input-field col s4">
@@ -101,10 +120,11 @@ class Modal extends Component {
                   </div>
                   <div className="row">
                     <div className="input-field col s4">
-                      <select  ref={Select => {this.Select = Select;}} multiple>
+                      <select ref={Select => {this.Select = Select;}} multiple>
+                          <option value="" disabled >Выберите зону</option>
                         {
                             this.state.zoneList.map((zone,index) => (
-                              <option value={index}>{zone}</option>
+                              <option key={index} value={zone}>{zone}</option>
                             ))}
                       </select>
                     </div>
@@ -113,8 +133,8 @@ class Modal extends Component {
               </div>
             </div>
             <div className="modal-footer customModalFooter">
-              <a href="#!" onClick={()=> console.log("Save")} className="modal-close waves-effect waves-green btn-flat">Сохранить</a>
-              <a href="#!" onClick={()=> console.log("Cancel")}className="modal-close waves-effect waves-green btn-flat">Отмена</a>
+              <a href="#!" onClick={()=> this.closeModalSave()} className="modal-close waves-effect waves-green btn-flat">Сохранить</a>
+              <a href="#!" onClick={()=> console.log("Cancel")} className="modal-close waves-effect waves-green btn-flat">Отмена</a>
             </div>
           </div>
         </Fragment>
