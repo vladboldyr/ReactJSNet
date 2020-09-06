@@ -20,6 +20,7 @@ class Modal extends Component {
             startDate : new Date(),
             selectedZone: "Выберите зону",
             zoneList : ["Подмыхи","Руки","Ноги"],
+            depilationMethods: ["Шугаринг","Воск"],
             nameClient: "",
             numberPhon: "",
             zoneSelected: [],
@@ -43,7 +44,7 @@ class Modal extends Component {
     console.log("Save");
     const values = this.state.instanceFormSelect.getSelectedValues();
     this.setState((state) => {
-      return {zoneSelected : state.zoneSelected.concat(values),}
+      return {zoneSelected : state.zoneSelected.concat(values)}
     });
   }
 
@@ -91,7 +92,7 @@ class Modal extends Component {
           <div ref={Modal => {this.Modal = Modal;}} id="modalAddClient" className="modal customModal">
             <div className="modal-content">
               <div className="row">
-                <form className="col s12">
+                <div className="col s12">
                   <div className="row">
                     <div className="input-field col s4">
                       <i className="material-icons prefix">account_circle</i>
@@ -128,8 +129,23 @@ class Modal extends Component {
                             ))}
                       </select>
                     </div>
+                    <div className="col s4">
+                    <p>
+                    <label>
+                      <input name="group1" type="radio" checked />
+                      <span>Red</span>
+                    </label>
+                  </p>
+                  <p>
+                    <label>
+                      <input name="group1" type="radio" />
+                      <span>Yellow</span>
+                    </label>
+                  </p>
+                      
+                    </div>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
             <div className="modal-footer customModalFooter">
