@@ -5,3 +5,20 @@
 .customModal {
     height: 55%;
 }
+
+.elementsRadioButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.textArea {
+    resize: none;
+    height: 12rem;
+    margin-left: .5rem;
+}
+
+textArea:focus {
+    border: 2px solid #26a69a !important;
+    outline: 0 none;
+}

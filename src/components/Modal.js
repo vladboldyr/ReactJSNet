@@ -21,6 +21,8 @@ class Modal extends Component {
             selectedZone: "Выберите зону",
             zoneList : ["Подмыхи","Руки","Ноги"],
             depilationMethods: ["Шугаринг","Воск"],
+            selectedOptionDepilation: "",
+            text: "Напишите комментарий",
             nameClient: "",
             numberPhon: "",
             zoneSelected: [],
@@ -56,6 +58,14 @@ class Modal extends Component {
     this.setState({numberPhon : e.target.value});
   }
 
+  onChangeText(e) {
+    this.setState({text : e.target.value});
+  }
+
+  onValueChangeDepilation(e){
+      console.log(e.target.value);
+   this.setState({selectedOptionDepilation: e.target.value});
+  }
   componentDidMount() {
     const options = {
        onOpenStart: () => {
@@ -82,6 +92,7 @@ class Modal extends Component {
      
      M.FormSelect.init(this.Select,{});
      M.Modal.init(this.Modal, options);
+     this.setState({selectedOptionDepilation: this.state.depilationMethods[0]});
      this.setState({instanceFormSelect:M.FormSelect.getInstance(this.Select)});
 
   }
@@ -119,8 +130,8 @@ class Modal extends Component {
                         />
                     </div>
                   </div>
-                  <div className="row">
-                    <div className="input-field col s4">
+                  <div className="row elementsRadioButton">
+                    <div className="input-field col s6">
                       <select ref={Select => {this.Select = Select;}} multiple>
                           <option value="" disabled >Выберите зону</option>
                         {
@@ -129,21 +140,24 @@ class Modal extends Component {
                             ))}
                       </select>
                     </div>
-                    <div className="col s4">
-                    <p>
-                    <label>
-                      <input name="group1" type="radio" checked />
-                      <span>Red</span>
-                    </label>
-                  </p>
-                  <p>
-                    <label>
-                      <input name="group1" type="radio" />
-                      <span>Yellow</span>
-                    </label>
-                  </p>
-                      
+                    <div className="col s6">
+                        {
+                            this.state.depilationMethods.map((method,index) => {
+                                return ( <Fragment key={index}>
+                                                <label>
+                                                    <input className="with-gap" name="groupDepilation" type="radio" value={method}
+                                                           checked={this.state.selectedOptionDepilation === method}
+                                                           onChange={e => this.onValueChangeDepilation(e)}/>
+                                                    <span style={{marginRight:'10px'}}>{method}</span>
+                                                </label>
+                                        </Fragment>
+                                       )
+                            })
+                        }
                     </div>
+                  </div>
+                  <div className="row">
+                      <textarea className="textArea"  placeholder={this.state.text} onChange={event => this.onChangeText(event)}/>
                   </div>
                 </div>
               </div>
