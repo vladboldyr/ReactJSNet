@@ -11,6 +11,8 @@ import {registerLocale} from "react-datepicker";
 
 registerLocale("ru", ru);
 
+const textArea = "Напишите комментарий";
+
 class Modal extends Component {
     constructor(props) {
         super(props);
@@ -22,7 +24,7 @@ class Modal extends Component {
             zoneList : ["Подмыхи","Руки","Ноги"],
             depilationMethods: ["Шугаринг","Воск"],
             selectedOptionDepilation: "",
-            text: "Напишите комментарий",
+            text: "",
             nameClient: "",
             numberPhon: "",
             zoneSelected: [],
@@ -66,6 +68,15 @@ class Modal extends Component {
       console.log(e.target.value);
    this.setState({selectedOptionDepilation: e.target.value});
   }
+
+  /* componentDidUpdate(prevProps,prevState) {
+    Популярный пример (не забудьте сравнить пропсы):
+    if (this.state.text !== prevState.text) {
+      console.log(this.state.text);
+      this.setState({text:""});
+    }
+  } */
+
   componentDidMount() {
     const options = {
        onOpenStart: () => {
@@ -80,7 +91,8 @@ class Modal extends Component {
        },
        onCloseEnd: () => {
          console.log("Close End");
-         console.group(this.state.zoneSelected,this.state.nameClient,this.state.numberPhon,this.state.startDate);
+         console.group(this.state.zoneSelected,this.state.nameClient,this.state.numberPhon,this.state.startDate,this.state.text);
+         this.setState((state)=> {return {text:""}});
        },
        inDuration: 250,
        outDuration: 250,
@@ -99,7 +111,7 @@ class Modal extends Component {
   render() {
     return (
         <Fragment>
-          <button data-target="modalAddClient" type="button" className="btn-floating btn-small waves-effect waves-light modal-trigger buttonPlus"><i className="material-icons">add</i></button>
+          <button data-target="modalAddClient" type="button" className="btn-floating btn-small waves-effect waves-light modal-trigger pulse buttonPlus"><i className="material-icons">add</i></button>
           <div ref={Modal => {this.Modal = Modal;}} id="modalAddClient" className="modal customModal">
             <div className="modal-content">
               <div className="row">
@@ -157,7 +169,7 @@ class Modal extends Component {
                     </div>
                   </div>
                   <div className="row">
-                      <textarea className="textArea"  placeholder={this.state.text} onChange={event => this.onChangeText(event)}/>
+                      <textarea className="textArea" value={this.state.text} placeholder={textArea} onChange={event => this.onChangeText(event)}/>
                   </div>
                 </div>
               </div>
