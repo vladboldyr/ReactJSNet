@@ -2,11 +2,12 @@ import React, {Fragment} from 'react';
 import {ListClients} from "./ListClients";
 import Modal from "./Modal";
 import './Clients.css';
+import data from '../data.json';
 
 export const Clients = () => {
-    const clients = new Array(3)
+    const clients = data;/*new Array(3)
         .fill('')
-        .map((_,i)=>({id:i, Name: `Name ${i + 1}`}))
+        .map((_,i)=>({id:i, Name: `Name ${i + 1}`}))*/
 
     return (
         <div>
