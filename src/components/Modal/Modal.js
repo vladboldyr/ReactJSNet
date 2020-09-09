@@ -29,7 +29,7 @@ class Modal extends Component {
             numberPhon: "",
             zoneSelected: [],
             instanceFormSelect : null
-        }
+        };
         this.setStartDate = this.setStartDate.bind(this);
         this.generationExcludeTimes = this.generationExcludeTimes.bind(this);
     };
@@ -90,6 +90,8 @@ class Modal extends Component {
          console.log("Close Start");
        },
        onCloseEnd: () => {
+         const newClient = [{"id":5,"name":"Kate","phone":3333,"Date":"2020-09-20T18:30:00.00Z","depilation":"Воск","zoneList":"Подмыхи","text":"gfgfgfgf"}];
+         //this.props.addNewClient(newClient);
          console.log("Close End");
          console.group(this.state.zoneSelected,this.state.nameClient,this.state.numberPhon,this.state.startDate,this.state.text);
          this.setState((state)=> {return {text:""}});

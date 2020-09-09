@@ -1,14 +1,27 @@
-import React, {Fragment} from 'react';
-import {ListClients} from "./ListClients";
-import Modal from "./Modal";
+import React, {useState,useEffect} from 'react';
+import {ListClients} from "../ListClients/ListClients";
+import Modal from "../Modal/Modal";
 import './Clients.css';
-import data from '../data.json';
+import data from '../../data.json';
 
 export const Clients = () => {
-    const clients = data;/*new Array(3)
-        .fill('')
-        .map((_,i)=>({id:i, Name: `Name ${i + 1}`}))*/
+    const [clients,changeClients] = useState([]);
 
+    useEffect(() => {
+        changeClients(parserData);
+    },[]);
+
+   const addNewClient = newClient => {
+       changeClients([...clients,...newClient]);
+   };
+
+   const parserData = () => {
+       let dataTable = [...data];
+       for (let key in dataTable) {
+               dataTable[key].zoneList = dataTable[key].zoneList.join();
+       }
+       return dataTable;
+    };
     return (
         <div>
             <div className="row">
@@ -19,7 +32,7 @@ export const Clients = () => {
                             <input id="icon_search" type="text" className="validate"/>
                             <label htmlFor="icon_search">Введи имя</label>
                         </div>
-                        <Modal/>
+                        <Modal addNewClient={addNewClient}/>
                     </div>
                 </form>
             </div>

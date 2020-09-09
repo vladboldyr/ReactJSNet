@@ -2,10 +2,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const path = require("path");
 const webpack = require("webpack");
+let development = process.env.NODE_ENV === 'development';
 
 module.exports = {
     entry: "./src/index.js",
     mode: "development",
+    devtool: "source-map",
     module: {
         rules: [
             {
@@ -17,13 +19,21 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: ["file-loader"]
             }
         ]
     },
     externals: {
         jquery: 'jQuery'
     },
-    resolve: { extensions: ["*", ".js", ".jsx"] },
+    resolve: {
+        modules: [
+            'node_modules'
+        ],
+        extensions: ["*", ".js", ".jsx"] },
     output: {
         path: path.resolve(__dirname, "dist/"),
         publicPath: "/dist/",
