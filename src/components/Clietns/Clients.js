@@ -32,7 +32,7 @@ export const Clients = () => {
                             <input id="icon_search" type="text" className="validate"/>
                             <label htmlFor="icon_search">Введи имя</label>
                         </div>
-                        <Modal addNewClient={addNewClient}/>
+                        <Modal countClients={clients.length} addNewClient={addNewClient}/>
                     </div>
                 </form>
             </div>

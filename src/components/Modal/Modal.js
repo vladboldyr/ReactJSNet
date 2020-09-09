@@ -77,7 +77,8 @@ class Modal extends Component {
   }
 
   clearFields() {
-      //M.FormSelect.destroy();
+    //TO Do до конца селект не сбрасывается
+      this.state.instanceFormSelect.input.value = '';
       this.setState((state) => {
           return {
               zoneSelected : [],
@@ -89,7 +90,8 @@ class Modal extends Component {
               isSave:false
           }
       });
-     // M.FormSelect.init(this.Select,{});
+      //this.Select = null;
+      //M.FormSelect.init(this.Select,{});
   };
   /* componentDidUpdate(prevProps,prevState) {
     if (this.state.text !== prevState.text) {
@@ -111,12 +113,12 @@ class Modal extends Component {
          console.log("Close Start");
        },
        onCloseEnd: () => {
-         const newClient = [{"id":5,"name":"Kate","phone":3333,"Date":"2020-09-20T18:30:00.00Z","depilation":"Воск","zoneList":"Подмыхи","text":"gfgfgfgf"}];
+         console.group(this.state.zoneSelected, this.state.nameClient, this.state.numberPhone, this.state.selectedDate, this.state.text, this.state.selectedOptionDepilation);
+         const newClient = [{"id":this.props.countClients + 1,"name":this.state.nameClient,"phone":this.state.numberPhone,"Date":this.state.selectedDate.toString(),"depilation":this.state.selectedOptionDepilation,"zoneList":this.state.zoneSelected,"text":this.state.text}];
           if (this.state.isSave) {
-              console.group(this.state.zoneSelected, this.state.nameClient, this.state.numberPhone, this.state.selectedDate, this.state.text, this.state.selectedOptionDepilation);
+              this.props.addNewClient(newClient);
               this.clearFields();
           }
-         //this.setState((state)=> {return {text:""}});
        },
        inDuration: 250,
        outDuration: 250,
