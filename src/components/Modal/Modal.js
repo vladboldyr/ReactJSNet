@@ -19,23 +19,23 @@ class Modal extends Component {
         this.state = {
             dateFormat : "dd/MM/yyyy hh:mm",
             timeIntervals: 15,
-            startDate : new Date(),
-            selectedZone: "Выберите зону",
+            selectedDate: new Date(),
             zoneList : ["Подмыхи","Руки","Ноги"],
             depilationMethods: ["Шугаринг","Воск"],
             selectedOptionDepilation: "",
             text: "",
             nameClient: "",
-            numberPhon: "",
+            numberPhone: "",
             zoneSelected: [],
-            instanceFormSelect : null
+            instanceFormSelect : null,
+            isSave:false
         };
-        this.setStartDate = this.setStartDate.bind(this);
+        this.setSelectedDate = this.setSelectedDate.bind(this);
         this.generationExcludeTimes = this.generationExcludeTimes.bind(this);
     };
 
-  setStartDate(date) {
-   this.setState({startDate : date});
+  setSelectedDate(date) {
+    this.setState({selectedDate : date});
   }
 
   generationExcludeTimes(times) {
@@ -45,10 +45,18 @@ class Modal extends Component {
   }
 
   closeModalSave() {
-    console.log("Save");
     const values = this.state.instanceFormSelect.getSelectedValues();
+
     this.setState((state) => {
-      return {zoneSelected : state.zoneSelected.concat(values)}
+      return {
+          zoneSelected : state.zoneSelected.concat(values),
+          nameClient : state.nameClient,
+          numberPhone : state.numberPhone,
+          text : state.text,
+          selectedOptionDepilation: state.selectedOptionDepilation,
+          selectedDate: state.selectedDate,
+          isSave:true
+      }
     });
   }
 
@@ -57,7 +65,7 @@ class Modal extends Component {
   }
 
   onChangePhone(e) {
-    this.setState({numberPhon : e.target.value});
+    this.setState({numberPhone : e.target.value});
   }
 
   onChangeText(e) {
@@ -65,12 +73,25 @@ class Modal extends Component {
   }
 
   onValueChangeDepilation(e){
-      console.log(e.target.value);
    this.setState({selectedOptionDepilation: e.target.value});
   }
 
+  clearFields() {
+      //M.FormSelect.destroy();
+      this.setState((state) => {
+          return {
+              zoneSelected : [],
+              nameClient : "",
+              numberPhone : "",
+              text : "",
+              selectedOptionDepilation: this.state.depilationMethods[0],
+              selectedDate: new Date(),
+              isSave:false
+          }
+      });
+     // M.FormSelect.init(this.Select,{});
+  };
   /* componentDidUpdate(prevProps,prevState) {
-    Популярный пример (не забудьте сравнить пропсы):
     if (this.state.text !== prevState.text) {
       console.log(this.state.text);
       this.setState({text:""});
@@ -91,10 +112,11 @@ class Modal extends Component {
        },
        onCloseEnd: () => {
          const newClient = [{"id":5,"name":"Kate","phone":3333,"Date":"2020-09-20T18:30:00.00Z","depilation":"Воск","zoneList":"Подмыхи","text":"gfgfgfgf"}];
-         //this.props.addNewClient(newClient);
-         console.log("Close End");
-         console.group(this.state.zoneSelected,this.state.nameClient,this.state.numberPhon,this.state.startDate,this.state.text);
-         this.setState((state)=> {return {text:""}});
+          if (this.state.isSave) {
+              console.group(this.state.zoneSelected, this.state.nameClient, this.state.numberPhone, this.state.selectedDate, this.state.text, this.state.selectedOptionDepilation);
+              this.clearFields();
+          }
+         //this.setState((state)=> {return {text:""}});
        },
        inDuration: 250,
        outDuration: 250,
@@ -121,12 +143,12 @@ class Modal extends Component {
                   <div className="row">
                     <div className="input-field col s4">
                       <i className="material-icons prefix">account_circle</i>
-                      <input id="icon_prefix" type="text" className="validate" onChange={e => this.onChangeName(e)}/>
+                      <input id="icon_prefix" type="text" className="validate" value={this.state.nameClient} onChange={e => this.onChangeName(e)}/>
                       <label htmlFor="icon_prefix">Введите Имя</label>
                     </div>
                     <div className="input-field col s4">
                       <i className="material-icons prefix">phone</i>
-                      <input id="icon_telephone" type="number" className="validate" onChange={e => this.onChangePhone(e)}/>
+                      <input id="icon_telephone" type="number" className="validate" value={this.state.numberPhone} onChange={e => this.onChangePhone(e)}/>
                       <label htmlFor="icon_telephone">Телефон</label>
                     </div>
                     <div className="input-field col s4">
@@ -135,8 +157,8 @@ class Modal extends Component {
                             dateFormat={this.state.dateFormat}
                             timeIntervals={this.state.timeIntervals}
                             showTimeSelect
-                            selected={this.state.startDate}
-                            onChange={date => this.setStartDate(date)}
+                            selected={this.state.selectedDate}
+                            onChange={date => this.setSelectedDate(date)}
                             excludeTimes={this.generationExcludeTimes(
                                 [{"minutes":30,"hour":15},{"minutes":30,"hour":16}]
                               )
@@ -178,7 +200,7 @@ class Modal extends Component {
             </div>
             <div className="modal-footer customModalFooter">
               <a href="#!" onClick={()=> this.closeModalSave()} className="modal-close waves-effect waves-green btn-flat">Сохранить</a>
-              <a href="#!" onClick={()=> console.log("Cancel")} className="modal-close waves-effect waves-green btn-flat">Отмена</a>
+              <a href="#!" onClick={()=> this.clearFields()} className="modal-close waves-effect waves-green btn-flat">Отмена</a>
             </div>
           </div>
         </Fragment>
