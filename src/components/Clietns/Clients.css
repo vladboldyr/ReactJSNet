@@ -1,8 +1,29 @@
-.client {
+.filterText {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
 }
+
+.buttonClear {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+
+}
+
+.shiftButtonClear {
+    margin-top: 2rem;
+    margin-left: -2rem;
+}
+
+.buttonClear:focus {
+    background-color: Transparent !important;
+    border: none;
+}
+
 .input-field.suffix i {
     position: absolute;
     width: 3rem;
