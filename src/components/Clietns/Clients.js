@@ -42,6 +42,13 @@ export const Clients = () => {
                             </div>
                         </div>
                         <div className="col s2 offset-s7">
+                            <div style={{display:"inline-block"}}>
+                              <p style={{display:"inline-block"}}>Записать клиента</p>
+                              <button data-target="modalAddClient" type="button"
+                                      className="btn-floating btn-small waves-effect waves-light modal-trigger pulse buttonPlus"
+                                      style={{display:"inline-block",marginBottom:"1rem"}}>
+                                  <i className="material-icons">add</i></button>
+                            </div>
                             <Modal countClients={clients.length} addNewClient={addNewClient}/>
                         </div>
                     </div>

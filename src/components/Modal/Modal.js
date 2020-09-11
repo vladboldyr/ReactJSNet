@@ -137,12 +137,7 @@ class Modal extends Component {
   render() {
     return (
         <Fragment>
-          <span>
-              Записать клиента
-              <button data-target="modalAddClient" type="button"
-                      className="btn-floating btn-small waves-effect waves-light modal-trigger pulse buttonPlus">
-                  <i className="material-icons">add</i></button>
-          </span>
+
           <div ref={Modal => {this.Modal = Modal;}} id="modalAddClient" className="modal customModal">
             <div className="modal-content">
               <div className="row">
