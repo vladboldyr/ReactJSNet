@@ -7,7 +7,9 @@ import data from '../../data.json';
 export const Clients = () => {
     const [clients,changeClients] = useState([]);
     const [filterText,setFilterText] = useState('');
+    const filteredItems = clients.filter(item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
+    
     useEffect(() => {
         changeClients(parserData);
     },[]);
@@ -17,6 +19,7 @@ export const Clients = () => {
        changeClients([...clients,...newClient]);
    };
 
+   
    const parserData = () => {
        let dataTable = [...data];
        for (let key in dataTable) {
@@ -54,7 +57,7 @@ export const Clients = () => {
                     </div>
                 </form>
             </div>
-            <ListClients clients={clients}/>
+            <ListClients clients={filteredItems}/>
         </div>
     )
 }
