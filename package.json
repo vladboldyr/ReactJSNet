@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/vladboldyr/ReactJSNet#readme",
   "devDependencies": {
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
     "aspnet-webpack": "^2.0.3",
     "babel-core": "^6.26.0",
     "babel-loader": "^8.1.0",
@@ -30,12 +32,16 @@
     "css-loader": "^1.0.0",
     "file-loader": "^1.1.6",
     "html-webpack-plugin": "^4.4.1",
+    "source-map-loader": "^1.1.0",
     "style-loader": "^0.23.0",
+    "ts-loader": "^8.0.3",
+    "typescript": "^4.0.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "awesome-typescript-loader": "^5.2.1",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.5.2",
     "date-fns": "latest",

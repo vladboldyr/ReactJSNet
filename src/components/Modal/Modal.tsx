@@ -13,8 +13,34 @@ registerLocale("ru", ru);
 
 const textArea = "Напишите комментарий";
 
-class Modal extends Component {
-    constructor(props) {
+type ClientProps = {
+  countClients: number,
+  addNewClient: (newClient: any) => [];
+}
+
+type refState = {
+  Select?: any|HTMLElement,
+  Modal?:any|HTMLElement
+}
+type ModalState = {
+  dateFormat : string,
+  timeIntervals: number,
+  selectedDate: Date,
+  zoneList : string[],
+  depilationMethods: string[],
+  selectedOptionDepilation: string,
+  text: string,
+  nameClient: string
+  numberPhone: string,
+  zoneSelected: string[],
+  instanceFormSelect : any|HTMLElement,
+  isSave:boolean,
+  Select?: any|HTMLElement,
+  Modal?:any|HTMLElement
+}
+
+class Modal extends Component<ClientProps, ModalState> {
+    constructor(props:ClientProps) {
         super(props);
         this.state = {
             dateFormat : "dd/MM/yyyy hh:mm",

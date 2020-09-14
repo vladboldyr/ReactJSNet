@@ -4,6 +4,17 @@ import Modal from "../Modal/Modal";
 import './Clients.css';
 import data from '../../data.json';
 
+interface Data {
+    id:number,
+    name:string,
+    phone:string,
+    Date:string,
+    zoneList:string[],
+    depilation:string,
+    text:string
+}
+
+
 export const Clients = () => {
     const [clients,changeClients] = useState([]);
     const [filterText,setFilterText] = useState('');
@@ -11,7 +22,7 @@ export const Clients = () => {
 
     
     useEffect(() => {
-        changeClients(parserData);
+        //changeClients(parserData);
     },[]);
 
 
@@ -20,13 +31,13 @@ export const Clients = () => {
    };
 
    
-   const parserData = () => {
-       let dataTable = [...data];
+  /*  const parserData = () => {
+       let dataTable: Data[] = [...data];
        for (let key in dataTable) {
                dataTable[key].zoneList = dataTable[key].zoneList.join();
        }
        return dataTable;
-    };
+    }; */
     return (
         <div>
             <div className="row">

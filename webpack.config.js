@@ -5,11 +5,15 @@ const webpack = require("webpack");
 let development = process.env.NODE_ENV === 'development';
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: "./src/index.tsx",
     mode: "development",
     devtool: "source-map",
     module: {
         rules: [
+            {
+                test: /\.(ts|tsx)$/,
+                loader: "awesome-typescript-loader",
+            },
             {
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
@@ -33,7 +37,7 @@ module.exports = {
         modules: [
             'node_modules'
         ],
-        extensions: ["*", ".js", ".jsx"] },
+        extensions: ["*", ".js", ".jsx",".ts", ".tsx"] },
     output: {
         path: path.resolve(__dirname, "dist/"),
         publicPath: "/dist/",
