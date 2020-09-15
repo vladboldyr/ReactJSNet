@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from "react";
 import 'materialize-css';
 /*import { Formik } from 'formik';*/
-import {Clients} from './components/Clietns/Clients';
+import {Clients} from './components/Clietns/clients';
 
 
 function App() {

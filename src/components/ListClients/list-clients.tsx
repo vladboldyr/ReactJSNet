@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import DataTable,{ createTheme } from 'react-data-table-component';
-import {customTheme} from './CustomTheme';
+import {customTheme} from './custom-theme';
 
 const customStyles = {
     rows: {

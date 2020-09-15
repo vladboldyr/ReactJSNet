@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker/dist/react-datepicker.min";
 import  "react-datepicker/dist/react-datepicker-cssmodules.min.css"
 import  "react-datepicker/dist/react-datepicker.min.css";
 import M, { Dropdown } from "materialize-css";
-import "./Modal.css";
+import "./modal.css";
 import ru from "date-fns/locale/ru"
 import setMinutes from "date-fns/setMinutes";
 import setHours from "date-fns/setHours";
@@ -18,7 +18,6 @@ type ClientProps = {
   countClients: number,
   addNewClient: (newClient: any) => void;
 }
-
 
 type ModalState = {
   dateFormat : string,
@@ -36,43 +35,37 @@ type ModalState = {
 }
 
 class Modal extends Component<ClientProps, ModalState> {
-  private Modal = createRef<HTMLDivElement>();
-  private Select = createRef<HTMLSelectElement>();
-    constructor(props:ClientProps) {
-        super(props);
-        this.state = {
-            dateFormat : "dd/MM/yyyy hh:mm",
-            timeIntervals: 15,
-            selectedDate: new Date(),
-            zoneList : ["Подмыхи","Руки","Ноги"],
-            depilationMethods: ["Шугаринг","Воск"],
-            selectedOptionDepilation: "",
-            text: "",
-            nameClient: "",
-            numberPhone: "",
-            zoneSelected: [],
-            instanceFormSelect : null,
-            isSave:false,
-        };
-        this.setSelectedDate = this.setSelectedDate.bind(this);
-        this.generationExcludeTimes = this.generationExcludeTimes.bind(this);
-        this.getModalRef = this.getModalRef.bind(this);
-        this.getSelectRef = this.getSelectRef.bind(this);
-    };
+  private ModalRef = createRef<HTMLDivElement>();
+  private SelectRef = createRef<HTMLSelectElement>();
+    
+  state = {
+    dateFormat : "dd/MM/yyyy hh:mm",
+    timeIntervals: 15,
+    selectedDate: new Date(),
+    zoneList : ["Подмыхи","Руки","Ноги"],
+    depilationMethods: ["Шугаринг","Воск"],
+    selectedOptionDepilation: "",
+    text: "",
+    nameClient: "",
+    numberPhone: "",
+    zoneSelected: [],
+    instanceFormSelect : null,
+    isSave:false,
+  };
 
-  setSelectedDate(date) {
+  setSelectedDate = (date) => {
     this.setState({selectedDate : date});
   }
 
-  getModalRef(node) {
-    this.Modal = node;
+  getModalRef = (node) => {
+    this.ModalRef = node;
   }
 
-  getSelectRef(node) {
-    this.Select = node;
+   getSelectRef = (node) => {
+    this.SelectRef = node;
   }  
 
-  generationExcludeTimes(times) {
+  generationExcludeTimes = (times) => {
       return times.map(time => {
           return setHours(setMinutes(new Date(), time.minutes), time.hour);
       });
@@ -160,10 +153,10 @@ class Modal extends Component<ClientProps, ModalState> {
      };
       
      
-     M.FormSelect.init(this.Select,{});
-     M.Modal.init(this.Modal, options);
+     M.FormSelect.init(this.SelectRef,{});
+     M.Modal.init(this.ModalRef, options);
      this.setState({selectedOptionDepilation: this.state.depilationMethods[0]});
-     this.setState({instanceFormSelect:M.FormSelect.getInstance(this.Select)});
+     this.setState({instanceFormSelect:M.FormSelect.getInstance(this.SelectRef)});
 
   }
   render() {

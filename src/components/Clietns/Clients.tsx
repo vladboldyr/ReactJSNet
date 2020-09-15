@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
-import {ListClients} from "../ListClients/ListClients";
-import Modal from "../Modal/Modal";
+import {ListClients} from "../ListClients/list-clients";
+import Modal from "../Modal/modal";
 import './Clients.css';
 import data from '../../data.json';
 
