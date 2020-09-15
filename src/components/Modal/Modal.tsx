@@ -1,4 +1,4 @@
-import React, {Component,Fragment, useState,useEffect} from 'react';
+import React, {Component,Fragment, useState,useEffect, createRef} from 'react';
 import DatePicker from "react-datepicker/dist/react-datepicker.min";
 import  "react-datepicker/dist/react-datepicker-cssmodules.min.css"
 import  "react-datepicker/dist/react-datepicker.min.css";
@@ -8,6 +8,7 @@ import ru from "date-fns/locale/ru"
 import setMinutes from "date-fns/setMinutes";
 import setHours from "date-fns/setHours";
 import {registerLocale} from "react-datepicker";
+//import ReactDOM from 'react-dom';
 
 registerLocale("ru", ru);
 
@@ -15,13 +16,10 @@ const textArea = "Напишите комментарий";
 
 type ClientProps = {
   countClients: number,
-  addNewClient: (newClient: any) => [];
+  addNewClient: (newClient: any) => void;
 }
 
-type refState = {
-  Select?: any|HTMLElement,
-  Modal?:any|HTMLElement
-}
+
 type ModalState = {
   dateFormat : string,
   timeIntervals: number,
@@ -35,11 +33,11 @@ type ModalState = {
   zoneSelected: string[],
   instanceFormSelect : any|HTMLElement,
   isSave:boolean,
-  Select?: any|HTMLElement,
-  Modal?:any|HTMLElement
 }
 
 class Modal extends Component<ClientProps, ModalState> {
+  private Modal = createRef<HTMLDivElement>();
+  private Select = createRef<HTMLSelectElement>();
     constructor(props:ClientProps) {
         super(props);
         this.state = {
@@ -54,15 +52,25 @@ class Modal extends Component<ClientProps, ModalState> {
             numberPhone: "",
             zoneSelected: [],
             instanceFormSelect : null,
-            isSave:false
+            isSave:false,
         };
         this.setSelectedDate = this.setSelectedDate.bind(this);
         this.generationExcludeTimes = this.generationExcludeTimes.bind(this);
+        this.getModalRef = this.getModalRef.bind(this);
+        this.getSelectRef = this.getSelectRef.bind(this);
     };
 
   setSelectedDate(date) {
     this.setState({selectedDate : date});
   }
+
+  getModalRef(node) {
+    this.Modal = node;
+  }
+
+  getSelectRef(node) {
+    this.Select = node;
+  }  
 
   generationExcludeTimes(times) {
       return times.map(time => {
@@ -111,23 +119,20 @@ class Modal extends Component<ClientProps, ModalState> {
               nameClient : "",
               numberPhone : "",
               text : "",
-              selectedOptionDepilation: this.state.depilationMethods[0],
+              selectedOptionDepilation: state.depilationMethods[0],
               selectedDate: new Date(),
               isSave:false
           }
       });
-      //this.Select = null;
-      //M.FormSelect.init(this.Select,{});
   };
-  /* componentDidUpdate(prevProps,prevState) {
-    if (this.state.text !== prevState.text) {
-      console.log(this.state.text);
-      this.setState({text:""});
+ /*  componentDidUpdate(prevProps,prevState) {
+    if (this.state.instanceFormSelect === prevState.instanceFormSelect) {
+     
     }
   } */
 
   componentDidMount() {
-    const options = {
+     const options = {
        onOpenStart: () => {
          console.log("Open Start");
        },
@@ -153,6 +158,7 @@ class Modal extends Component<ClientProps, ModalState> {
        startingTop: "4%",
        endingTop: "10%"
      };
+      
      
      M.FormSelect.init(this.Select,{});
      M.Modal.init(this.Modal, options);
@@ -161,78 +167,75 @@ class Modal extends Component<ClientProps, ModalState> {
 
   }
   render() {
-    return (
-        <Fragment>
-
-          <div ref={Modal => {this.Modal = Modal;}} id="modalAddClient" className="modal customModal">
-            <div className="modal-content">
-              <div className="row">
-                <div className="col s12">
-                  <div className="row">
-                    <div className="input-field col s4">
-                      <i className="material-icons prefix">account_circle</i>
-                      <input id="icon_prefix" type="text" className="validate" value={this.state.nameClient} onChange={e => this.onChangeName(e)}/>
-                      <label htmlFor="icon_prefix">Введите Имя</label>
+      return (
+            <div ref={this.getModalRef} id="modalAddClient" className="modal customModal">
+              <div className="modal-content">
+                <div className="row">
+                  <div className="col s12">
+                    <div className="row">
+                      <div className="input-field col s4">
+                        <i className="material-icons prefix">account_circle</i>
+                        <input id="icon_prefix" type="text" className="validate" value={this.state.nameClient} onChange={e => this.onChangeName(e)}/>
+                        <label htmlFor="icon_prefix">Введите Имя</label>
+                      </div>
+                      <div className="input-field col s4">
+                        <i className="material-icons prefix">phone</i>
+                        <input id="icon_telephone" type="number" className="validate" value={this.state.numberPhone} onChange={e => this.onChangePhone(e)}/>
+                        <label htmlFor="icon_telephone">Телефон</label>
+                      </div>
+                      <div className="input-field col s4">
+                          <DatePicker
+                              locale='ru'
+                              dateFormat={this.state.dateFormat}
+                              timeIntervals={this.state.timeIntervals}
+                              showTimeSelect
+                              selected={this.state.selectedDate}
+                              onChange={date => this.setSelectedDate(date)}
+                              excludeTimes={this.generationExcludeTimes(
+                                  [{"minutes":30,"hour":15},{"minutes":30,"hour":16}]
+                                )
+                              }
+                          />
+                      </div>
                     </div>
-                    <div className="input-field col s4">
-                      <i className="material-icons prefix">phone</i>
-                      <input id="icon_telephone" type="number" className="validate" value={this.state.numberPhone} onChange={e => this.onChangePhone(e)}/>
-                      <label htmlFor="icon_telephone">Телефон</label>
+                    <div className="row elementsRadioButton">
+                      <div className="input-field col s6">
+                        <select ref={this.getSelectRef} multiple>
+                            <option value="" disabled >Выберите зону</option>
+                          {
+                              this.state.zoneList.map((zone,index) => (
+                                <option key={index} value={zone}>{zone}</option>
+                              ))}
+                        </select>
+                      </div>
+                      <div className="col s6">
+                          {
+                              this.state.depilationMethods.map((method,index) => {
+                                  return ( <Fragment key={index}>
+                                                  <label>
+                                                      <input className="with-gap" name="groupDepilation" type="radio" value={method}
+                                                            checked={this.state.selectedOptionDepilation === method}
+                                                            onChange={e => this.onValueChangeDepilation(e)}/>
+                                                      <span style={{marginRight:'10px'}}>{method}</span>
+                                                  </label>
+                                          </Fragment>
+                                        )
+                              })
+                          }
+                      </div>
                     </div>
-                    <div className="input-field col s4">
-                        <DatePicker
-                            locale='ru'
-                            dateFormat={this.state.dateFormat}
-                            timeIntervals={this.state.timeIntervals}
-                            showTimeSelect
-                            selected={this.state.selectedDate}
-                            onChange={date => this.setSelectedDate(date)}
-                            excludeTimes={this.generationExcludeTimes(
-                                [{"minutes":30,"hour":15},{"minutes":30,"hour":16}]
-                              )
-                            }
-                        />
+                    <div className="row">
+                        <textarea className="textArea" value={this.state.text} placeholder={textArea} onChange={event => this.onChangeText(event)}/>
                     </div>
-                  </div>
-                  <div className="row elementsRadioButton">
-                    <div className="input-field col s6">
-                      <select ref={Select => {this.Select = Select;}} multiple>
-                          <option value="" disabled >Выберите зону</option>
-                        {
-                            this.state.zoneList.map((zone,index) => (
-                              <option key={index} value={zone}>{zone}</option>
-                            ))}
-                      </select>
-                    </div>
-                    <div className="col s6">
-                        {
-                            this.state.depilationMethods.map((method,index) => {
-                                return ( <Fragment key={index}>
-                                                <label>
-                                                    <input className="with-gap" name="groupDepilation" type="radio" value={method}
-                                                           checked={this.state.selectedOptionDepilation === method}
-                                                           onChange={e => this.onValueChangeDepilation(e)}/>
-                                                    <span style={{marginRight:'10px'}}>{method}</span>
-                                                </label>
-                                        </Fragment>
-                                       )
-                            })
-                        }
-                    </div>
-                  </div>
-                  <div className="row">
-                      <textarea className="textArea" value={this.state.text} placeholder={textArea} onChange={event => this.onChangeText(event)}/>
                   </div>
                 </div>
               </div>
+              <div className="modal-footer customModalFooter">
+                <a href="#!" onClick={()=> this.closeModalSave()} className="modal-close waves-effect waves-green btn-flat">Сохранить</a>
+                <a href="#!" onClick={()=> this.clearFields()} className="modal-close waves-effect waves-green btn-flat">Отмена</a>
+              </div>
             </div>
-            <div className="modal-footer customModalFooter">
-              <a href="#!" onClick={()=> this.closeModalSave()} className="modal-close waves-effect waves-green btn-flat">Сохранить</a>
-              <a href="#!" onClick={()=> this.clearFields()} className="modal-close waves-effect waves-green btn-flat">Отмена</a>
-            </div>
-          </div>
-        </Fragment>
-    );
+      );
 }
 }
 export default Modal;

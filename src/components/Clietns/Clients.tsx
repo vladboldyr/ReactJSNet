@@ -22,6 +22,7 @@ export const Clients = () => {
 
     
     useEffect(() => {
+        changeClients([...data]);
         //changeClients(parserData);
     },[]);
 
@@ -30,7 +31,7 @@ export const Clients = () => {
        changeClients([...clients,...newClient]);
    };
 
-   
+  
   /*  const parserData = () => {
        let dataTable: Data[] = [...data];
        for (let key in dataTable) {
@@ -58,9 +59,11 @@ export const Clients = () => {
                         <div className="col s2 offset-s7">
                             <div style={{display:"inline-block"}}>
                               <p style={{display:"inline-block"}}>Записать клиента</p>
-                              <button data-target="modalAddClient" type="button"
+                              <button type="button"
+                                      data-target="modalAddClient"
                                       className="btn-floating btn-small waves-effect waves-light modal-trigger pulse buttonPlus"
-                                      style={{display:"inline-block",marginBottom:"1rem"}}>
+                                      style={{display:"inline-block",marginBottom:"1rem"}} 
+                                      >
                                   <i className="material-icons">add</i></button>
                             </div>
                             <Modal countClients={clients.length} addNewClient={addNewClient}/>
