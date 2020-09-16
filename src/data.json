@@ -4,7 +4,7 @@
     "name":"Elena",
     "phone":"89049284317",
     "Date":"2020-09-20T18:30:00.00Z",
-    "zoneList":["Руки","Ноги"],
+    "zoneList":"Руки,Ноги",
     "depilation":"Шугаринг",
     "text":"bla-bla-bla"
   },
@@ -13,7 +13,7 @@
     "name":"Olga",
     "phone":"89049284343",
     "Date":"2020-09-21T16:30:00.00Z",
-    "zoneList":["Руки"],
+    "zoneList":"Руки",
     "depilation":"Воск",
     "text":"bla-bla-bla"
   },
@@ -22,7 +22,7 @@
     "name":"Mila",
     "phone":"89049280000",
     "Date":"2020-09-21T21:30:00.00Z",
-    "zoneList":["Ноги"],
+    "zoneList":"Ноги",
     "depilation":"Шугаринг",
     "text":"bla-bla-bla"
   },
@@ -31,7 +31,7 @@
     "name":"Milena",
     "phone":"89049284343",
     "Date":"2020-09-21T17:30:00.00Z",
-    "zoneList":["Руки"],
+    "zoneList":"Руки",
     "depilation":"Воск",
     "text":"bla-bla-bla"
   }

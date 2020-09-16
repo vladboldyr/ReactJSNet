@@ -9,7 +9,7 @@ interface Data {
     name:string,
     phone:string,
     Date:string,
-    zoneList:string[],
+    zoneList:string,
     depilation:string,
     text:string
 }
@@ -23,22 +23,13 @@ export const Clients = () => {
     
     useEffect(() => {
         changeClients([...data]);
-        //changeClients(parserData);
     },[]);
 
 
-   const addNewClient = newClient => {
-       changeClients([...clients,...newClient]);
-   };
+    const addNewClient = newClient => {
+        changeClients([...clients,...newClient]);
+    };
 
-  
-  /*  const parserData = () => {
-       let dataTable: Data[] = [...data];
-       for (let key in dataTable) {
-               dataTable[key].zoneList = dataTable[key].zoneList.join();
-       }
-       return dataTable;
-    }; */
     return (
         <div>
             <div className="row">
