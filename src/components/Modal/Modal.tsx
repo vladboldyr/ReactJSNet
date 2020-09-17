@@ -35,9 +35,21 @@ type ModalState = {
 }
 const options = [
   { value: 'Руки', label: 'Руки', key: '1' },
-  { value: 'Ноги', label: 'Ноги', key: '2' },
-  { value: 'Подмыхи', label: 'Подмыхи', key: '3' },
-  { value: 'Усики', label: 'Усики', key: '4' } 
+  { value: 'Ноги полностью', label: 'Ноги полностью', key: '2' },
+  { value: 'Бедра', label: 'Бедра', key: '3' },
+  { value: 'Голени', label: 'Голени', key: '4' },
+  { value: 'Руки полностью', label: 'Руки полностью', key: '5' },
+  { value: 'До локтя', label: 'До локтя', key: '6' },
+  { value: 'От локтя', label: 'От локтя', key: '7' },
+  { value: 'Зона на лице', label: 'Зона на лице', key: '8' },
+  { value: 'Подмышечные впадины', label: 'Подмышечные впадины', key: '9' },
+  { value: 'Спина', label: 'Спина', key: '10' },
+  { value: 'Живот', label: 'Живот', key: '11' },
+  { value: 'Дорожка на животе', label: 'Дорожка на животе', key: '12' },
+  { value: 'Ягодицы', label: 'Ягодицы', key: '13' },
+  { value: 'Классическое бикини', label: 'Классическое бикини', key: '14' },
+  { value: 'Глубокое бикини', label: 'Глубокое бикини', key: '15' },
+  { value: 'Грудь', label: 'Грудь', key: '16' } 
 ];
 
 class Modal extends Component<ClientProps, ModalState> {
