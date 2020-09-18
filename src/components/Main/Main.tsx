@@ -22,10 +22,10 @@ export const Main = () => {
                             Меню
                         </button>
                         <ul className="nav__wrapper">
-                            <li className="nav__item"><NavLink to="/" exact>Home</NavLink></li>
-                            <li className="nav__item"><NavLink to="/price">Price</NavLink></li>
-                            <li className="nav__item"><NavLink to="/works">Works</NavLink></li>
-                            <li className="nav__item"><NavLink to="/contacts">Contacts</NavLink></li>
+                            <li className="nav__item"><NavLink to="/" exact>О нас</NavLink></li>
+                            <li className="nav__item"><NavLink to="/price">Прайс</NavLink></li>
+                            <li className="nav__item"><NavLink to="/works">Наши работы</NavLink></li>
+                            <li className="nav__item"><NavLink to="/contacts">Контакты</NavLink></li>
                         </ul>
                     </nav>
                 </div>

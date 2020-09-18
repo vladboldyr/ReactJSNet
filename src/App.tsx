@@ -24,7 +24,7 @@ const App = () => {
             <Route path={'/price'} component={Price} />
             <Route path={'/works'} component={Works} />
             <Route path={'/contacts'} component={Contacts} />
-            <Redirect from='/' to='/home'/>
+            <Redirect from='/' to='/'/>
           </Switch>
         </>
     );
