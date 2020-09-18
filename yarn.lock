@@ -11661,6 +11661,11 @@ svgo@^1.0.0, svgo@^1.2.2:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+switch@0.0.0:
+  version "0.0.0"
+  resolved "http://opo-buildagent2:4873/switch/-/switch-0.0.0.tgz#4a9d225b00799fb16ee0214663b0b0b22ce133cf"
+  integrity sha1-Sp0iWwB5n7Fu4CFGY7CwsizhM88=
+
 symbol-observable@^1.0.3:
   version "1.2.0"
   resolved "http://opo-buildagent2:4873/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"

@@ -9,7 +9,6 @@ import setMinutes from "date-fns/setMinutes";
 import setHours from "date-fns/setHours";
 import {registerLocale} from "react-datepicker";
 import Select from 'react-select';
-//import ReactDOM from 'react-dom';
 
 registerLocale("ru", ru);
 

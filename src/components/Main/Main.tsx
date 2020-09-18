@@ -1,4 +1,6 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
+
 import './main.css';
 
 const imgSugar = require('../../icon/sugar.png');
@@ -20,10 +22,10 @@ export const Main = () => {
                             Меню
                         </button>
                         <ul className="nav__wrapper">
-                            <li className="nav__item"><a href="#">Home</a></li>
-                            <li className="nav__item"><a href="#">Price</a></li>
-                            <li className="nav__item"><a href="#">Works</a></li>
-                            <li className="nav__item"><a href="#">Contacts</a></li>
+                            <li className="nav__item"><NavLink to="/" exact>Home</NavLink></li>
+                            <li className="nav__item"><NavLink to="/price">Price</NavLink></li>
+                            <li className="nav__item"><NavLink to="/works">Works</NavLink></li>
+                            <li className="nav__item"><NavLink to="/contacts">Contacts</NavLink></li>
                         </ul>
                     </nav>
                 </div>
@@ -32,5 +34,6 @@ export const Main = () => {
                 </div>
             </div>
         </header>
+       
     );
 }
