@@ -1,0 +1,138 @@
+div,a,nav,button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.navCustom {
+    background-color: inherit !important;
+    color: #000;
+    box-shadow: inherit !important;
+    -webkit-box-shadow: inherit !important;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.button {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    color: #fff;
+    background-color: #2fa0f6;
+    min-width: 120px;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.button span {
+    display: none;
+}
+
+@media (min-width: 600px) {
+    .button span {
+      display: initial;
+    }
+}
+
+
+.wrapper {
+    max-width: 1140px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.brand {
+    font-weight: bold;
+    font-size: 20px;
+ }
+  
+.sugar-header {
+    position: relative;
+    background-color: #def7ff;
+}
+
+.sugar-header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    /* flex-wrap: wrap; */
+}
+
+@media (min-width: 630px) {
+    .sugar-header__wrapper {
+        justify-content: initial;
+    }
+}
+
+@media (min-width: 630px) {
+    .sugar-header__middle {
+      margin-left: auto;
+    }
+}
+@media (max-width: 629px) {
+    .sugar-header__start {
+      padding-left: 4rem;
+    }
+}
+
+@media (max-width: 629px) {
+    .sugar-header__end {
+      padding-right: 4rem;
+    }
+}
+
+@media (min-width: 630px) {
+    .nav__wrapper {
+      display: flex;
+    }
+}
+@media (max-width: 629px) {
+    .nav__wrapper {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      z-index: -1;
+      background-color: #d9f0f7;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    }
+    .nav__wrapper.active {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+
+.nav__item a {
+    display: block;
+    padding: 1rem;
+    color: black;
+}
+
+.nav__toggle {
+    display: none;
+}
+
+@media (max-width: 629px) {
+    .nav__toggle {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
+}

@@ -8,11 +8,12 @@ import ru from "date-fns/locale/ru"
 import setMinutes from "date-fns/setMinutes";
 import setHours from "date-fns/setHours";
 import {registerLocale} from "react-datepicker";
-//import ReactDOM from 'react-dom';
+import Select from 'react-select';
 
 registerLocale("ru", ru);
 
 const textArea = "Напишите комментарий";
+const textDefaultOption = 'Выберите зону';
 
 type ClientProps = {
   countClients: number,
@@ -23,33 +24,46 @@ type ModalState = {
   dateFormat : string,
   timeIntervals: number,
   selectedDate: Date,
-  zoneList : string[],
   depilationMethods: string[],
   selectedOptionDepilation: string,
   text: string,
   nameClient: string
   numberPhone: string,
-  zoneSelected: string[],
-  instanceFormSelect : any|HTMLElement,
+  zoneSelected: string[] | string,
   isSave:boolean,
 }
+const options = [
+  { value: 'Руки', label: 'Руки', key: '1' },
+  { value: 'Ноги полностью', label: 'Ноги полностью', key: '2' },
+  { value: 'Бедра', label: 'Бедра', key: '3' },
+  { value: 'Голени', label: 'Голени', key: '4' },
+  { value: 'Руки полностью', label: 'Руки полностью', key: '5' },
+  { value: 'До локтя', label: 'До локтя', key: '6' },
+  { value: 'От локтя', label: 'От локтя', key: '7' },
+  { value: 'Зона на лице', label: 'Зона на лице', key: '8' },
+  { value: 'Подмышечные впадины', label: 'Подмышечные впадины', key: '9' },
+  { value: 'Спина', label: 'Спина', key: '10' },
+  { value: 'Живот', label: 'Живот', key: '11' },
+  { value: 'Дорожка на животе', label: 'Дорожка на животе', key: '12' },
+  { value: 'Ягодицы', label: 'Ягодицы', key: '13' },
+  { value: 'Классическое бикини', label: 'Классическое бикини', key: '14' },
+  { value: 'Глубокое бикини', label: 'Глубокое бикини', key: '15' },
+  { value: 'Грудь', label: 'Грудь', key: '16' } 
+];
 
 class Modal extends Component<ClientProps, ModalState> {
   private ModalRef = createRef<HTMLDivElement>();
-  private SelectRef = createRef<HTMLSelectElement>();
     
   state = {
     dateFormat : "dd/MM/yyyy hh:mm",
     timeIntervals: 15,
     selectedDate: new Date(),
-    zoneList : ["Подмыхи","Руки","Ноги"],
     depilationMethods: ["Шугаринг","Воск"],
     selectedOptionDepilation: "",
     text: "",
     nameClient: "",
     numberPhone: "",
     zoneSelected: [],
-    instanceFormSelect : null,
     isSave:false,
   };
 
@@ -61,10 +75,6 @@ class Modal extends Component<ClientProps, ModalState> {
     this.ModalRef = node;
   }
 
-   getSelectRef = (node) => {
-    this.SelectRef = node;
-  }  
-
   generationExcludeTimes = (times) => {
       return times.map(time => {
           return setHours(setMinutes(new Date(), time.minutes), time.hour);
@@ -72,11 +82,9 @@ class Modal extends Component<ClientProps, ModalState> {
   }
 
   closeModalSave() {
-    const values = this.state.instanceFormSelect.getSelectedValues();
-
     this.setState((state) => {
       return {
-          zoneSelected : state.zoneSelected.concat(values),
+          zoneSelected : state.zoneSelected,
           nameClient : state.nameClient,
           numberPhone : state.numberPhone,
           text : state.text,
@@ -85,6 +93,10 @@ class Modal extends Component<ClientProps, ModalState> {
           isSave:true
       }
     });
+  }
+
+  handleChange = (selectedOption) => {
+    this.setState({zoneSelected : selectedOption});
   }
 
   onChangeName(e) {
@@ -104,19 +116,17 @@ class Modal extends Component<ClientProps, ModalState> {
   }
 
   clearFields() {
-    //TO Do до конца селект не сбрасывается
-      this.state.instanceFormSelect.input.value = '';
-      this.setState((state) => {
-          return {
-              zoneSelected : [],
-              nameClient : "",
-              numberPhone : "",
-              text : "",
-              selectedOptionDepilation: state.depilationMethods[0],
-              selectedDate: new Date(),
-              isSave:false
-          }
-      });
+    this.setState((state) => {
+        return {
+            zoneSelected : [],
+            nameClient : "",
+            numberPhone : "",
+            text : "",
+            selectedOptionDepilation: state.depilationMethods[0],
+            selectedDate: new Date(),
+            isSave:false
+        }
+    });
   };
  /*  componentDidUpdate(prevProps,prevState) {
     if (this.state.instanceFormSelect === prevState.instanceFormSelect) {
@@ -138,7 +148,9 @@ class Modal extends Component<ClientProps, ModalState> {
        },
        onCloseEnd: () => {
          console.group(this.state.zoneSelected, this.state.nameClient, this.state.numberPhone, this.state.selectedDate, this.state.text, this.state.selectedOptionDepilation);
-         const newClient = [{"id":this.props.countClients + 1,"name":this.state.nameClient,"phone":this.state.numberPhone,"Date":this.state.selectedDate.toString(),"depilation":this.state.selectedOptionDepilation,"zoneList":this.state.zoneSelected,"text":this.state.text}];
+         const newClient = [{"id":this.props.countClients + 1,"name":this.state.nameClient,"phone":this.state.numberPhone,
+                            "Date":this.state.selectedDate.toString(),"depilation":this.state.selectedOptionDepilation,
+                            "zoneList":this.state.zoneSelected.map(val => val.value).join(),"text":this.state.text}];
           if (this.state.isSave) {
               this.props.addNewClient(newClient);
               this.clearFields();
@@ -151,13 +163,8 @@ class Modal extends Component<ClientProps, ModalState> {
        startingTop: "4%",
        endingTop: "10%"
      };
-      
-     
-     M.FormSelect.init(this.SelectRef,{});
      M.Modal.init(this.ModalRef, options);
      this.setState({selectedOptionDepilation: this.state.depilationMethods[0]});
-     this.setState({instanceFormSelect:M.FormSelect.getInstance(this.SelectRef)});
-
   }
   render() {
       return (
@@ -193,13 +200,15 @@ class Modal extends Component<ClientProps, ModalState> {
                     </div>
                     <div className="row elementsRadioButton">
                       <div className="input-field col s6">
-                        <select ref={this.getSelectRef} multiple>
-                            <option value="" disabled >Выберите зону</option>
-                          {
-                              this.state.zoneList.map((zone,index) => (
-                                <option key={index} value={zone}>{zone}</option>
-                              ))}
-                        </select>
+                        <Select
+                          placeholder={textDefaultOption}
+                          value={this.state.zoneSelected || { value: textDefaultOption, label: textDefaultOption, key: '0' }}
+                          isMulti
+                          isClearable
+                          isSearchable
+                          options={options}
+                          onChange={selectedOption => this.handleChange(selectedOption)} 
+                        />
                       </div>
                       <div className="col s6">
                           {
