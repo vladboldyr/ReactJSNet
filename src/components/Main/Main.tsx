@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
-import './main.css';
+import './main.less';
 
 const imgSugar = require('../../icon/sugar.png');
 
@@ -11,13 +11,13 @@ export const Main = () => {
             <div className="wrapper sugar-header__wrapper">
                 <div className="sugar-header__start">
                     <img style = {{width:'45px',height:'45px'}} src = {imgSugar}/>
-                    <a href="#" className="brand">
+                    <a href="#" className="sugar-header__start__brand">
                         SugarPro
                         Studio
                     </a>
                 </div>
                 <div className="sugar-header__middle">
-                    <nav className="nav navCustom">
+                    <nav className="nav sugar-header__middleNavCustom">
                         <button className="nav__toggle" aria-expanded="false" type="button">
                             Меню
                         </button>

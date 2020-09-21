@@ -31,7 +31,7 @@ export const Clients = () => {
     };
 
     return (
-        <div>
+        <>
             <div className="row">
                 <form>
                     <div className="row" style={{marginLeft:'20px'}}>
@@ -63,6 +63,6 @@ export const Clients = () => {
                 </form>
             </div>
             <ListClients clients={filteredItems}/>
-        </div>
+        </>
     )
 }
