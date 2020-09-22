@@ -18,7 +18,7 @@ export const Main = () => {
                 </div>
                 <div className="sugar-header__middle">
                     <nav className="nav sugar-header__middleNavCustom">
-                        <button className="nav__toggle" aria-expanded="false" type="button">
+                        <button className="nav__toggle" aria-expanded="false" type="button" onClick={()=> console.log("click")}>
                             Меню
                         </button>
                         <ul className="nav__wrapper">
