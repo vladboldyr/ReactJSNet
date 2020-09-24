@@ -29,7 +29,7 @@ export const Main = () => {
                     </div>
                     <nav className={activeMenu ? "sugar-header__menu active" : "sugar-header__menu"}>
                         <ul className="sugar-header__list">
-                            <li className="sugar-header__link"><NavLink to="/" exact>О нас</NavLink></li>
+                            <li className="sugar-header__link"><NavLink to="/" exact>О Студии</NavLink></li>
                             <li className="sugar-header__link"><NavLink to="/price">Прайс</NavLink></li>
                             <li className="sugar-header__link"><NavLink to="/works">Наши работы</NavLink></li>
                             <li className="sugar-header__link"><NavLink to="/contacts">Контакты</NavLink></li>

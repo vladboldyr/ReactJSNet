@@ -29,9 +29,8 @@ html,body{
  
  
 .sugar-header {
-   
     position: fixed;
-    background-color: #def7ff;
+    background-color: #fffafa;
     width: 100%;
     top:0;
     left: 0;
@@ -45,7 +44,7 @@ html,body{
     height: 100%;
     top:0;
     left: 0;
-    background-color: #5e5373;
+    background-color: #fffafa;//#fcdab7;
     z-index: 2;
 }
 .sugar-header__logo{
@@ -87,15 +86,28 @@ html,body{
     display: flex;
     position: relative;
     z-index: 2;
+    font-weight: bold;
+    font-family: "Helvetica";
 }
 .sugar-header__list li{
     float: none;
     margin: 0 0 0 20px;
 }
+
+.sugar-header__list li a{
+    color: black;
+}
+
 .sugar-header__link{
     text-transform: uppercase;
     font-size: 18px;
     text-decoration: none;
+}
+.sugar-header__list li a:hover{
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: inherit;
+  color: hotpink;
 }
 
 .sugar-header__burger{}
