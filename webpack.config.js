@@ -4,6 +4,9 @@ const path = require("path");
 const webpack = require("webpack");
 let development = process.env.NODE_ENV === 'development';
 
+//const extractCSS = new ExtractTextPlugin('./stylesheets/[name].css');
+//const extractLESS = new ExtractTextPlugin('./stylesheets/[name].less');
+
 module.exports = {
     entry: "./src/index.tsx",
     mode: "development",
@@ -23,6 +26,20 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader' // translates CSS into CommonJS
+                    },
+                    {
+                        loader: 'less-loader' // compiles Less to CSS
+                    }
+                ]
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,

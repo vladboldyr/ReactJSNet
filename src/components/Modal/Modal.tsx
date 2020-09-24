@@ -168,7 +168,7 @@ class Modal extends Component<ClientProps, ModalState> {
   }
   render() {
       return (
-            <div ref={this.getModalRef} id="modalAddClient" className="modal customModal">
+            <div ref={this.getModalRef} id="modalAddClient" className="modal custom-modal">
               <div className="modal-content">
                 <div className="row">
                   <div className="col s12">
@@ -198,7 +198,7 @@ class Modal extends Component<ClientProps, ModalState> {
                           />
                       </div>
                     </div>
-                    <div className="row elementsRadioButton">
+                    <div className="row modal__elements-radioButton">
                       <div className="input-field col s6">
                         <Select
                           placeholder={textDefaultOption}
@@ -232,7 +232,7 @@ class Modal extends Component<ClientProps, ModalState> {
                   </div>
                 </div>
               </div>
-              <div className="modal-footer customModalFooter">
+              <div className="modal-footer custom-modal__footer">
                 <a href="#!" onClick={()=> this.closeModalSave()} className="modal-close waves-effect waves-green btn-flat">Сохранить</a>
                 <a href="#!" onClick={()=> this.clearFields()} className="modal-close waves-effect waves-green btn-flat">Отмена</a>
               </div>

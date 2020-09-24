@@ -1,12 +1,12 @@
-.customModalFooter{
+.custom-modal__footer{
     position: absolute;
     bottom: 0;
 }
-.customModal {
+.custom-modal {
     height: 55%;
 }
 
-.elementsRadioButton {
+.modal__elements-radioButton {
     display: flex;
     justify-content: space-between;
     align-items: center;

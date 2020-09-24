@@ -1,39 +1,59 @@
-import React from 'react';
-import {NavLink} from 'react-router-dom';
-
-import './main.css';
+import React, { useState } from 'react';
+import { Route, Switch, Redirect, withRouter ,NavLink } from 'react-router-dom';
+import {Clients} from '../Clietns/clients';
+import {Home} from '../Home/home';
+import {Price} from '../Price/price';
+import {Works} from '../MyWorks/works';
+import {Contacts} from '../Contacts/contacts';
+import './main.less';
 
 const imgSugar = require('../../icon/sugar.png');
 
 export const Main = () => {
+    const [activeMenu,isActiveMenu] = useState(false);
+    const clickBurger = () => {
+        isActiveMenu(!activeMenu);
+        document.body.classList.toggle('lock',!activeMenu);
+    }
     return(
-        <header className="sugar-header">
-            <div className="wrapper sugar-header__wrapper">
-                <div className="sugar-header__start">
-                    <img style = {{width:'45px',height:'45px'}} src = {imgSugar}/>
-                    <a href="#" className="brand">
-                        SugarPro
-                        Studio
-                    </a>
-                </div>
-                <div className="sugar-header__middle">
-                    <nav className="nav navCustom">
-                        <button className="nav__toggle" aria-expanded="false" type="button">
-                            Меню
-                        </button>
-                        <ul className="nav__wrapper">
-                            <li className="nav__item"><NavLink to="/" exact>О нас</NavLink></li>
-                            <li className="nav__item"><NavLink to="/price">Прайс</NavLink></li>
-                            <li className="nav__item"><NavLink to="/works">Наши работы</NavLink></li>
-                            <li className="nav__item"><NavLink to="/contacts">Контакты</NavLink></li>
-                        </ul>
+        <div className="wrapper">
+          <header className="sugar-header">
+            <div className="container">
+                <div className="sugar-header__body">
+                    <NavLink to="/" className="sugar-header__logo">
+                        <img src={imgSugar}/>
+                        <span className="sugar-header__start__brand"> SugarPro Studio</span>
+                    </NavLink>
+                    <div className={activeMenu ? "sugar-header__burger active":"sugar-header__burger"} onClick={()=> clickBurger()}>
+                        <span></span>
+                    </div>
+                    <nav className={activeMenu ? "sugar-header__menu active" : "sugar-header__menu"}>
+                        <ul className="sugar-header__list">
+                            <li className="sugar-header__link"><NavLink to="/" exact>О Студии</NavLink></li>
+                            <li className="sugar-header__link"><NavLink to="/price">Прайс</NavLink></li>
+                            <li className="sugar-header__link"><NavLink to="/works">Наши работы</NavLink></li>
+                            <li className="sugar-header__link"><NavLink to="/contacts">Контакты</NavLink></li>
+                         </ul>
                     </nav>
-                </div>
-                <div className="sugar-header__end">
-                    <a className="button" href="#">Sign in</a>
+                    <div className="sugar-header__end">
+                      <a className="button" href="#">Sign in</a> 
+                    </div>
                 </div>
             </div>
         </header>
-       
+          <div className="content">
+            <div className="content_text">
+            <Switch>
+                <Route path={'/'} exact component={Home} />
+                <Route path={'/price'} component={Price} />
+                <Route path={'/works'} component={Works} />
+                <Route path={'/contacts'} component={Contacts} />
+                <Redirect from='/' to='/'/>
+            </Switch>
+            </div>
+          </div>
+       </div>
     );
 }
+
+export default withRouter(Main)
