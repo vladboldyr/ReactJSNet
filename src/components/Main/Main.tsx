@@ -10,6 +10,7 @@ import './main.less';
 
 const imgSugar = require('../../icons/sugar.png');
 const authentication = require('../../icons/authentication.svg');
+const insta = require('../../icons/instagram.svg');
 
 export const Main = () => {
     const [activeMenu,isActiveMenu] = useState(false);
@@ -38,6 +39,16 @@ export const Main = () => {
                             <li className="sugar-header__link"><NavLink to="/contacts">Контакты</NavLink></li>
                          </ul>
                     </nav>
+                    <div className="sugar-header__contacts">
+                        <div className="sugar-heder__contacts-phone">
+                            <strong>+7 (908) 828-43-17</strong>
+                        </div>
+                        <div className="sugar-heder__contacts-linksSN">
+                            {/*<NavLink to="/">
+                                <img src={insta}/>
+                            </NavLink>*/}
+                        </div>
+                    </div>
                     <div className="sugar-header__end">
                       <a className="button" href="#">
                         <img src={authentication} alt="Авторизируйтесь"></img>
