@@ -48,7 +48,8 @@ module.exports = {
         ]
     },
     externals: {
-        jquery: 'jQuery'
+        jquery: 'jQuery',
+        react:'React'
     },
     resolve: {
         modules: [
