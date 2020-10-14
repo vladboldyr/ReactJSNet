@@ -23,6 +23,10 @@ package-lock.json
 # Mono auto generated files
 mono_crash.*
 
+
+#Next
+.next/
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
