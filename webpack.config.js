@@ -42,6 +42,23 @@ module.exports = {
                 ]
             },
             {
+              test: /\.(scss|sass)$/,
+              use: [
+                  {
+                      loader: 'style-loader'
+                  },
+                  {
+                      loader: 'css-loader' // translates CSS into CommonJS
+                  },
+                  { 
+                    loader: "css-modules-typescript-loader"
+                  }, 
+                  {
+                      loader: 'sass-loader' // compiles Sass to CSS
+                  }
+              ]
+          },
+            {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: ["file-loader"]
             }
@@ -55,7 +72,7 @@ module.exports = {
         modules: [
             'node_modules'
         ],
-        extensions: ["*", ".js", ".jsx",".ts", ".tsx"] },
+        extensions: ["*", ".js", ".jsx",".ts", ".tsx", ".css", ".scss"] },
     output: {
         path: path.resolve(__dirname, "dist/"),
         publicPath: "/dist/",

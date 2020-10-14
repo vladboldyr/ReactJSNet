@@ -1,4 +1,11 @@
 {
   "presets": ["@babel/env", "@babel/preset-react"],
-  "plugins": ["react-require"]
+  "plugins": 
+    [
+    //"import",
+    /* {
+      "libraryName": "antd",
+      "style": true
+    }, */
+    "react-require"]
 }

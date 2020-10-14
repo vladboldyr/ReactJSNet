@@ -4,7 +4,7 @@ import Modal from "../Modal/modal";
 import './Clients.css';
 import data from '../../data.json';
 
-interface Data {
+/* interface Data {
     id:number,
     name:string,
     phone:string,
@@ -12,7 +12,7 @@ interface Data {
     zoneList:string,
     depilation:string,
     text:string
-}
+} */
 
 
 export const Clients = () => {

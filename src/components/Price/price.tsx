@@ -21,7 +21,7 @@ const costs = [
 
 
 
-export const Price = () => {
+export default function Price() {
     return(
         <div>Price</div>
     );
