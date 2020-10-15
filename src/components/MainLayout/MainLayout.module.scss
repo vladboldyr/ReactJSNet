@@ -63,8 +63,10 @@
 }
 
 .sugarHeader__menu {
-  width: auto;
+  //width: auto;
+  flex: 3;
   background-color: inherit;
+  padding-left: 3rem !important;
   color: #000;
   box-shadow: inherit !important;
   -webkit-box-shadow: inherit !important;
@@ -73,11 +75,13 @@
 
 .sugarHeader__list{
   display: flex;
+  justify-content: center;
   position: relative;
   z-index: 2;
-  font-weight: bold;
+  //font-weight: bold;
   font-family: "Helvetica";
 }
+
 .sugarHeader__list li{
   float: none;
   margin: 0 0 0 20px;
@@ -87,16 +91,15 @@
 .sugarHeader__list li a{
   color: black;
   text-decoration: none;
-}
-
-.sugarHeader__link{
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .sugarHeader__list li a:hover{
-color: hotpink;
+  color: hotpink;
 }
+
+
 
 .sugarHeader__burger{}
 
@@ -178,27 +181,38 @@ color: hotpink;
 
 .sugarHeader__contacts{
   display: flex;
+  flex: 1;
   z-index: 2;
+  align-items: center;
 }
 
 .sugarHeader__contactsPphone{
+  
 }
 
 .sugarHeader__contactsPhone strong{
   color: black;
   font-size: 18px;
+  line-height: initial;
 }
 .sugarHeader__contacts-phone strong:hover{
   color: hotpink;
-  font-size: 18px;
 }
 
-.sugarHeader__contactsLinksSN{
+.sugarHeader__contactsLinksSN {
+  float: left;
+  margin-left: 10px;
   flex: 0 0 20px;
   display: flex;
   z-index: 2;
 }
-.sugarHeader__contactsLinksSN img {
+.sugarHeader__linkInsta {
+   text-decoration: none;
+   margin-top: 3px;
+   /* margin-bottom: auto;
+  padding-bottom: initial; */
+}
+.sugarHeader__linkInsta img {
   max-width: 100%;
   max-height: 100%;
 }

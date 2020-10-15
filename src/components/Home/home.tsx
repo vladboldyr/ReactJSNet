@@ -1,9 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import {NavLink} from 'react-router-dom';
 import style from './home.module.scss';
 
-const imgHome = '/image/img_home.jpg';/* require('../../../public/image/img_home.jpg'); */
+const imgHome = '/image/img_home.jpg';
 export default function Home() {
     return(
         <div className={style.wrapperHome}>
