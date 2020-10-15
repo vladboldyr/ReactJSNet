@@ -6,6 +6,7 @@ import style from './MainLayout.module.scss';
 const imgSugar = '/icons/sugar.png';
 const authentication = '/icons/authentication.svg';
 const insta = '/icons/instagram.svg';
+const vk = '/icons/vk.svg';
 
 export const MainLayout = ({children, title = ' Sugar'}) => {
     const [activeMenu,isActiveMenu] = useState(false);
@@ -49,7 +50,10 @@ export const MainLayout = ({children, title = ' Sugar'}) => {
                         </div>
                         <div className={style.sugarHeader__contactsLinksSN}>
                             <Link href="https://www.instagram.com/lena_pushkina1/" passHref={true}>
-                                <a className={style.sugarHeader__linkInsta}><img src={insta}/></a>
+                                <a className={style.sugarHeader__linkInsta} target="_blank"><img src={insta}/></a>
+                            </Link>
+                            <Link href="https://vk.com/id167021275" passHref={true}>
+                                <a className={style.sugarHeader__linkInsta} target="_blank"><img src={vk}/></a>
                             </Link>
                         </div>
                     </div>

@@ -187,7 +187,7 @@
 }
 
 .sugarHeader__contactsPphone{
-  
+  flex: 1;
 }
 
 .sugarHeader__contactsPhone strong{
@@ -202,15 +202,15 @@
 .sugarHeader__contactsLinksSN {
   float: left;
   margin-left: 10px;
-  flex: 0 0 20px;
+  flex: 1;
+  //justify-content: space-around;
   display: flex;
   z-index: 2;
 }
 .sugarHeader__linkInsta {
    text-decoration: none;
-   margin-top: 3px;
-   /* margin-bottom: auto;
-  padding-bottom: initial; */
+   margin: 5px 0 0 10px;
+   flex: 0 0 25px;
 }
 .sugarHeader__linkInsta img {
   max-width: 100%;
