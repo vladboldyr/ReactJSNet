@@ -1,28 +1,58 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import DataTable from 'react-data-table-component';
 
-const costs = [
-    { name: 'Руки', cost: 'Руки', key: '1' },
-    { name: 'Ноги полностью', cost: 'Ноги полностью', key: '2' },
-    { name: 'Бедра', cost: 'Бедра', key: '3' },
-    { name: 'Голени', cost: 'Голени', key: '4' },
-    { name: 'Руки полностью', cost: 'Руки полностью', key: '5' },
-    { name: 'До локтя', cost: 'До локтя', key: '6' },
-    { name: 'От локтя', cost: 'От локтя', key: '7' },
-    { name: 'Зона на лице', cost: 'Зона на лице', key: '8' },
-    { name: 'Подмышечные впадины', cost: 'Подмышечные впадины', key: '9' },
-    { name: 'Спина', cost: 'Спина', key: '10' },
-    { name: 'Живот', cost: 'Живот', key: '11' },
-    { name: 'Дорожка на животе', cost: 'Дорожка на животе', key: '12' },
-    { name: 'Ягодицы', cost: 'Ягодицы', key: '13' },
-    { name: 'Классическое бикини', cost: 'Классическое бикини', key: '14' },
-    { name: 'Глубокое бикини', cost: 'Глубокое бикини', key: '15' },
-    { name: 'Грудь', cost: 'Грудь', key: '16' } 
+
+const customStyles = {
+  rows: {
+      style: {
+          fontSize:'17px'
+      }
+  }
+};
+const columns = [
+  {
+      name: 'Название',
+      selector: 'name',
+  },
+  {
+      name: 'Цена',
+      selector: 'cost',
+  }
+]
+
+const price = [
+    { id: uuidv4(), name: 'Руки', cost: 'Руки' },
+    { id: uuidv4(), name: 'Ноги полностью', cost: 'Ноги полностью'},
+    { id: uuidv4(), name: 'Бедра', cost: 'Бедра'},
+    { id: uuidv4(), name: 'Голени', cost: 'Голени'},
+    { id: uuidv4(), name: 'Руки полностью', cost: 'Руки полностью'},
+    { id: uuidv4(), name: 'До локтя', cost: 'До локтя'},
+    { id: uuidv4(), name: 'От локтя', cost: 'От локтя'},
+    { id: uuidv4(), name: 'Зона на лице', cost: 'Зона на лице'},
+    { id: uuidv4(), name: 'Подмышечные впадины', cost: 'Подмышечные впадины' },
+    { id: uuidv4(), name: 'Спина', cost: 'Спина' },
+    { id: uuidv4(), name: 'Живот', cost: 'Живот'},
+    { id: uuidv4(), name: 'Дорожка на животе', cost: 'Дорожка на животе'},
+    { id: uuidv4(), name: 'Ягодицы', cost: 'Ягодицы'},
+    { id: uuidv4(), name: 'Классическое бикини', cost: 'Классическое бикини'},
+    { id: uuidv4(), name: 'Глубокое бикини', cost: 'Глубокое бикини'},
+    { id: uuidv4(), name: 'Грудь', cost: 'Грудь' } 
   ];
 
 
 
 export default function Price() {
-    return(
+    return( 
+      <div>
         <div>Price</div>
+        <DataTable
+                columns={columns}
+                data={price}
+                highlightOnHover={true}
+                customStyles={customStyles}
+                selectableRows
+            />
+      </div>
     );
 }
