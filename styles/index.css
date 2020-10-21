@@ -1,6 +1,12 @@
-@import "~materialize-css/dist/css/materialize.min.css";
+/*@import "~materialize-css/dist/css/materialize.min.css";*/
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,400');
 /* @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"); */
 body {
     font-family: "Roboto", sans-serif;
 }
+#__next-prerender-indicator {
+  display: none;
+}
+/* input [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+  opacity: 1 !important;
+} */
