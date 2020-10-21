@@ -41,6 +41,11 @@ const price = [
   ];
 
 
+// type Data = {
+//     id: number;
+//     name: string;
+//     cost: number;
+// };
 
 export default function Price() {
     return( 
