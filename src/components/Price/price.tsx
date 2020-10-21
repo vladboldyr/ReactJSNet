@@ -64,30 +64,38 @@ const price = [
 // };
 
 export default function Price() {
-    return( 
-      <div>
-        <div>РАССЧИТАЙТЕ СТОИМОСТЬ ШУГАРИНГА</div>
-        <div style={{width:'50%'}}>
-          <DataTable
-              columns={columns}
-              data={price}
-              noHeader={true}
-              highlightOnHover={true}
-              customStyles={customStyles}
-              noContextMenu={true}
-              selectableRows
-              selectableRowsNoSelectAll={true}
-            />
-        </div>
-        <div style={{marginLeft:'0.9rem',marginTop:'1rem'}}>
-          <label style={{display:'flex',flexWrap:'nowrap',alignItems:'baseline'}}>
-            <input type="checkbox" style={{marginRight:'0.5rem',display:'flex'}}/>
-             <span style={{display:'flex',alignItems:'center'}}>
-               <h4 style={{display:'flex'}}>Комплекс</h4>
-               <h5 style={{display:'flex',fontWeight:'normal',paddingLeft:'20px'}}>Ноги полностью + глубокое бикини + подмышки</h5>
-            </span>
-          </label>
-        </div>
+  const [selectedRows, setSelectedRows] = React.useState([]);
+
+  const handleRowSelected = React.useCallback(state => {
+    setSelectedRows(state.selectedRows);
+    console.log(state.selectedRows);
+  }, []);
+
+  return( 
+    <div>
+      <div>РАССЧИТАЙТЕ СТОИМОСТЬ ШУГАРИНГА</div>
+      <div style={{width:'50%'}}>
+        <DataTable
+            columns={columns}
+            data={price}
+            noHeader={true}
+            highlightOnHover={true}
+            customStyles={customStyles}
+            noContextMenu={true}
+            selectableRows
+            selectableRowsNoSelectAll={true}
+            onSelectedRowsChange={handleRowSelected}
+          />
       </div>
+      <div style={{marginLeft:'0.9rem',marginTop:'1rem'}}>
+        <label style={{display:'flex',flexWrap:'nowrap',alignItems:'baseline'}}>
+          <input type="checkbox" style={{marginRight:'0.5rem',display:'flex'}}/>
+            <span style={{display:'flex',alignItems:'center'}}>
+              <h4 style={{display:'flex'}}>Комплекс</h4>
+              <h5 style={{display:'flex',fontWeight:'normal',paddingLeft:'20px'}}>Ноги полностью + глубокое бикини + подмышки</h5>
+          </span>
+        </label>
+      </div>
+    </div>
     );
 }
