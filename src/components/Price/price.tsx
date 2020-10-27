@@ -2,6 +2,8 @@ import React, { useState,useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import DataTable from 'react-data-table-component';
 
+import styles from './price.module.scss';
+
 interface Row {
   id: string;
   name: string;
@@ -11,7 +13,7 @@ interface Row {
 const customStyles = {
   rows: {
       style: {
-          fontSize:'15px',
+          fontSize:'16px',
           minHeight: '30px',
          // maxWidth:'50%'
       }
@@ -27,7 +29,7 @@ const customStyles = {
   },
   cells:{
     style:{
-      fontSize:'15px'
+      fontSize:'16px'
     }
   }
 };
@@ -59,8 +61,6 @@ const price = [
 const procedureFullLegs:Row = price.filter(element => element.name === 'Ноги полностью').pop();
 const procedureDeepBikini:Row = price.filter(element => element.name === 'Глубокое бикини').pop();
 const procedureShins:Row = price.filter(element => element.name === 'Голени').pop();
-
-
 
 
 export default function Price() {
@@ -103,7 +103,7 @@ export default function Price() {
     }
     changeCostOfTheProcedure(currentCost);
     
-  }, [selectedRows,firstComplexProcedure,secondComplexProcedure]);
+  }, [selectedRows]);
 
   const handleRowSelected = React.useCallback(state => {
     if (firstComplexProcedure) {
@@ -120,7 +120,7 @@ export default function Price() {
   return( 
     <div>
       <div>РАССЧИТАЙТЕ СТОИМОСТЬ ШУГАРИНГА</div>
-      <div style={{width:'50%'}}>
+      <div className={styles.wrapper__table}>
         <DataTable
             columns={columns}
             data={price}
@@ -133,21 +133,21 @@ export default function Price() {
             onSelectedRowsChange={handleRowSelected}
           />
       </div>
-      <div style={{marginLeft:'0.9rem',marginTop:'1rem'}}>
+      <div className={styles.wrapper__costForComplexProcedure}>
         <h4 style={{display:'flex'}}>Комплексы</h4>
-        <label style={{display:'flex',flexWrap:'nowrap',alignItems:'baseline'}}>
-          <input type="checkbox" style={{marginRight:'0.5rem',display:'flex'}} onClick={e => addFirstPriceOfTheProcedure(e)} defaultChecked={false}/>
-            <span style={{display:'flex',alignItems:'center'}}>
-              <h5 style={{display:'flex',fontWeight:'normal',paddingLeft:'20px'}}>
+        <label className={styles.label__costProcedure}>
+          <input type="checkbox" onClick={e => addFirstPriceOfTheProcedure(e)} defaultChecked={false}/>
+            <span className={styles.span__costProcedure}>
+              <h5 className={styles.span__costProcedure__text}>
                     {procedureFullLegs.name + "+" + procedureDeepBikini.name }{"(подмышечные впадины в подарок) "}
                     {procedureFullLegs.cost + procedureDeepBikini.cost}{" руб."}
               </h5>
           </span>
         </label>
-        <label style={{display:'flex',flexWrap:'nowrap',alignItems:'baseline'}}>
+        <label className={styles.label__costProcedure}>
           <input type="checkbox" style={{marginRight:'0.5rem',display:'flex'}} onClick={e => addSecondPriceOfTheProcedure(e)} defaultChecked={false}/>
-            <span style={{display:'flex',alignItems:'center'}}>
-              <h5 style={{display:'flex',fontWeight:'normal',paddingLeft:'20px'}}>
+            <span className={styles.span__costProcedure}>
+              <h5 className={styles.span__costProcedure__text}>
                     {procedureShins.name + "+" + procedureDeepBikini.name }{"(подмышечные впадины в подарок) "}
                     {procedureShins.cost + procedureDeepBikini.cost}{" руб."}
               </h5>
