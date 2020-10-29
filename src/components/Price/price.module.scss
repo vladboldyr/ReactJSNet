@@ -1,4 +1,27 @@
-input [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
-  opacity: 1;
+.wrapper__table {
+  width: 50%;
+}
+.wrapper__costForComplexProcedure{
+  margin-left: 0.9rem;
+  margin-top: 1rem
+}
+.label__costProcedure{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline
+}
+.label__costProcedure input {
+  margin-right: 0.5rem;
+  display: flex
+}
+.span__costProcedure {
+  display: flex;
+  align-items:center
 }
 
+.span__costProcedure__text{
+  display: flex;
+  font-weight: normal;
+  font-size: 16px;
+  padding-left: 20px;
+} 
