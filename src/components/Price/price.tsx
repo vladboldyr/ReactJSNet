@@ -71,27 +71,29 @@ export default function Price() {
 
   const addFirstPriceOfTheProcedure = e => {
     setFirstComplexProcedure(!firstComplexProcedure);
-    const procedures = [procedureFullLegs,procedureDeepBikini]; 
-    setSelectedRows(new Set([...selectedRows,...procedures]));
-
     if (!e.target.checked) {
       selectedRows.delete(procedureFullLegs);
       if(!secondComplexProcedure)
         selectedRows.delete(procedureDeepBikini);
       setSelectedRows(new Set([...selectedRows]));
     }
+    else {
+      const procedures = [procedureFullLegs,procedureDeepBikini]; 
+      setSelectedRows(new Set([...selectedRows,...procedures]));
+    }
   }
 
   const addSecondPriceOfTheProcedure = e => {
     setSecondComplexProcedure(!secondComplexProcedure);
-    const procedures = [procedureShins,procedureDeepBikini]; 
-    setSelectedRows(new Set([...selectedRows,...procedures]));
-
     if (!e.target.checked) {
       selectedRows.delete(procedureShins);
       if(!firstComplexProcedure)
         selectedRows.delete(procedureDeepBikini);
       setSelectedRows(new Set([...selectedRows]));
+    }
+    else {
+      const procedures = [procedureShins,procedureDeepBikini]; 
+      setSelectedRows(new Set([...selectedRows,...procedures]));
     }
   }
 
@@ -105,11 +107,13 @@ export default function Price() {
 
   const handleRowSelected = React.useCallback(state => {
     if (firstComplexProcedure) {
-      const procedures = [...state.selectedRows,procedureFullLegs,procedureDeepBikini]; 
+      const currentSelectedTable = state.selectedRows.filter(element => element.name !== "Подмышечные впадины"); 
+      const procedures = [...currentSelectedTable,procedureFullLegs,procedureDeepBikini]; 
       setSelectedRows(new Set([...procedures]));  
     }
     else if (secondComplexProcedure) {
-      const procedures = [...state.selectedRows,procedureShins,procedureDeepBikini]; 
+      const currentSelectedTable = state.selectedRows.filter(element => element.name !== "Подмышечные впадины"); 
+      const procedures = [...currentSelectedTable,procedureShins,procedureDeepBikini]; 
       setSelectedRows(new Set([...procedures])); 
     }
     else 
@@ -145,7 +149,7 @@ export default function Price() {
           </span>
         </label>
         <label className={styles.label__costProcedure}>
-          <input type="checkbox" style={{marginRight:'0.5rem',display:'flex'}} onClick={e => addSecondPriceOfTheProcedure(e)} defaultChecked={false}/>
+          <input type="checkbox" onClick={e => addSecondPriceOfTheProcedure(e)} defaultChecked={false}/>
             <span className={styles.span__costProcedure}>
               <h5 className={styles.span__costProcedure__text}>
                     {procedureShins.name + "+" + procedureDeepBikini.name }{"(подмышечные впадины в подарок) "}
@@ -153,9 +157,13 @@ export default function Price() {
               </h5>
           </span>
         </label>
+        <label className={styles.label__costProcedure}>
+          <input type="checkbox"/>
+            <h4 className={styles.span__costProcedure__text}>{"Первичная процедура,(после бритвы)"}</h4>
+        </label>
       </div>
       <div>
-        <h3>{costOfTheProcedure}{" руб."}</h3>
+        <h3 style={{marginLeft:"1rem"}}>{costOfTheProcedure}{" руб."}</h3>
       </div>
     </div>
     );
