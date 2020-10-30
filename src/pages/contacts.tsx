@@ -1,4 +1,4 @@
-import MainLayout from '../src/components/MainLayout/MainLayout';
+import MainLayout from '../components/MainLayout/MainLayout';
 
 const Contacts = () => {
   return(
