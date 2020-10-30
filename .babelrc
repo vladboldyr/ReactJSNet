@@ -1,11 +1,15 @@
 {
-  "presets": ["@babel/env", "@babel/preset-react","@babel/preset-typescript"],
-  "plugins": 
-    [
-    //"import",
-    /* {
-      "libraryName": "antd",
-      "style": true
-    }, */
+  "presets": ["@babel/env", "@babel/preset-react","@babel/preset-typescript"],/* ,
+    ["env", {
+      "targets": {
+        "browsers": ["last 2 Chrome versions"]
+      }
+    }] */
+  //],
+  "plugins": [
+   /*  [
+      ["transform-runtime", {
+        "regenerator": true
+      }], */
     "react-require"]
 }

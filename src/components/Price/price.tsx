@@ -168,7 +168,7 @@ export default function Price() {
       <div className={styles.wrapper__costForComplexProcedure}>
         <h4 style={{display:'flex'}}>Комплексы</h4>
         <label className={styles.label__costProcedure}>
-          <input type="checkbox" onClick={e => addFirstPriceOfTheProcedure(e)} defaultChecked={false}/>
+          <input type="checkbox" onClick={addFirstPriceOfTheProcedure} defaultChecked={false}/>
             <span className={styles.span__costProcedure}>
               <h5 className={styles.span__costProcedure__text}>
                     {procedureFullLegs.name + "+" + procedureDeepBikini.name }{"(подмышечные впадины в подарок) "}
@@ -177,7 +177,7 @@ export default function Price() {
           </span>
         </label>
         <label className={styles.label__costProcedure}>
-          <input type="checkbox" onClick={e => addSecondPriceOfTheProcedure(e)} defaultChecked={false}/>
+          <input type="checkbox" onClick={addSecondPriceOfTheProcedure} defaultChecked={false}/>
             <span className={styles.span__costProcedure}>
               <h5 className={styles.span__costProcedure__text}>
                     {procedureShins.name + "+" + procedureDeepBikini.name }{"(подмышечные впадины в подарок) "}
