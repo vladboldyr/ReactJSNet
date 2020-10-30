@@ -6,6 +6,7 @@ let development = process.env.NODE_ENV === 'development';
 
 //const extractCSS = new ExtractTextPlugin('./stylesheets/[name].css');
 //const extractLESS = new ExtractTextPlugin('./stylesheets/[name].less');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: "./src/index.tsx",
@@ -25,7 +26,10 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ["style-loader", "css-loader"]
+                use: ExtractTextPlugin.extract({
+                  fallback: "style-loader",
+                  use: "css-loader"
+                })/* ["style-loader", "css-loader"] */
             },
             {
                 test: /\.less$/,
@@ -88,5 +92,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: __dirname + "/public/index.html",
             inject: 'body'
-        })]
+        }),
+        new ExtractTextPlugin('[name].min.css')
+      ]
 };
