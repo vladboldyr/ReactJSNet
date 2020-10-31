@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHttp } from '../hooks/http.hook';
+import { useMessage } from '../hooks/message.hook';
 
 //TODO найти нормальное решение...
 if (typeof window !== 'undefined') {
@@ -8,12 +9,18 @@ if (typeof window !== 'undefined') {
 }
 
 const AuthPage = () => {
-  const {loading,error,request} = useHttp(); 
+  const message = useMessage();
+  const {loading,error,request,clearError} = useHttp(); 
   const [form, setForm] = useState({email: '', password: ''});
 
   const changeHandler = event => {
     setForm({...form,[event.target.name] : event.target.value });
   }
+
+  useEffect(()=> {
+    message(error);
+    clearError();
+  },[error,message,clearError]);
 
   const registerHandler = async () => {
     try {
