@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import { useEffect, useState } from 'react';
 import { useHttp } from '../hooks/http.hook';
 
@@ -18,12 +17,13 @@ const AuthPage = () => {
 
   const registerHandler = async () => {
     try {
-      const data = await request('/api/register','POST', {...form});
+      const data = await request('/api/auth/register','POST', {...form});
       console.log(`data = ${data}`);
     } catch (e) {
 
     }
   }
+
   return (
     <div className="row">
       <div className="col s6 offset-s3">
@@ -52,7 +52,7 @@ const AuthPage = () => {
             </div>
           </div>
           <div className="card-action">
-           <button className="btn yellow darken-4" style={{marginRight:10}} disabled={loading}>Войти</button>
+           <button className="btn yellow darken-4" style={{marginRight:10}}  disabled={loading}>Войти</button>
            <button className="btn grey lighten-1 black-text" onClick={registerHandler} disabled={loading}>Регистрация</button>
           </div>
       </div>

@@ -1,20 +1,45 @@
+const next = require('next');
 const express = require('express');
 const config = require('config');
+//const {createProxyMiddleware } = require('http-proxy-middleware');
+const dev = process.env.NODE_ENV !== 'production';
+const nextApp = next({dev});
+const handle = nextApp.getRequestHandler();
 const mongoose = require('mongoose');
 
+
+
+
+nextApp.prepare().then(() => {
 const app = express();
 
+app.use(express.json({extended:true}));
 
-const router = require("./routes/auth.routes");
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
+  next();
+});
+app.use("/api/auth", require('./routes/auth.routes'));
+const PORT = config.get('port') || 3000;
 
-app.use("/api/auth", router);
+ /*  app.use(
+    createProxyMiddleware( '/api',{
+      target: 'http://localhost:3000',
+      pathRewrite:{
+        "^/api":'/api'
+      },
+      changeOrigin: true,
+    }),
+    require('./routes/auth.routes')
+  ); */
 
-const PORT = config.get('port') || 5000;
 
-const settings = {
-  reconnectTries : Number.MAX_VALUE,
-  autoReconnect : true
-};
+app.all('*', (req, res) => {
+  return handle(req, res)
+})
+
 const localUri = "mongodb://127.0.0.1:27017/test";
 var db ={};
 async function start() {
@@ -26,7 +51,6 @@ async function start() {
     },(err,dbref)=>{
       db = dbref;
     });
-    app.use("/", router);
     app.listen(PORT, () => console.log(`App has been started on port ${PORT}...`));
    
   } catch(e) {
@@ -41,4 +65,6 @@ connection.once("open", function() {
   console.log("MongoDB database connection established successfully");
 });
 
-
+}).catch(err => {
+  console.log('Error:::::', err);
+})

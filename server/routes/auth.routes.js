@@ -6,6 +6,11 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/User');
 const router = Router();
 
+/* router.post('/',async (req,res) => {
+  console.log(req.body);
+  res.status(200).json({message : 'Ok'});
+}); */
+
 
 // api/auth/register
 router.post(
@@ -20,7 +25,7 @@ router.post(
       if (!errors.isEmpty()) return res.status(400).json({errors: errors.array(), message: "Некорректные данные при регистрации"});
 
       const {email, password} = req.body;
-
+      console.log(req.body);
       const candidate = await User.findOne({email});
 
       if (candidate) {
