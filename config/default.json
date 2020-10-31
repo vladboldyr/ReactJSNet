@@ -1,5 +1,5 @@
 {
   "port":3000,
-  "jwSecret":"vladislav boldyr",
+  "jwtSecret":"vladislav boldyr",
   "mongoUri":"mongodb+srv://vladislav:1234@cluster0.6g0vy.mongodb.net/test?retryWrites=true&w=majority"
 }
