@@ -1,15 +1,10 @@
 const {Router} = require('express');
 const bcrypt = require('bcryptjs');
-const config = require('../../config/default.json');
+const config = require('config');
 const {check, validationResult} = require('express-validator');
 const jwt = require('jsonwebtoken');
 const User = require('../model/User');
 const router = Router();
-
-/* router.post('/',async (req,res) => {
-  console.log(req.body);
-  res.status(200).json({message : 'Ok'});
-}); */
 
 
 // api/auth/register
@@ -35,7 +30,7 @@ router.post(
       const user = new User({email, password: hashedPassword});
 
       await user.save();
-      res.status(201).json({message: 'Пользователь успешно зарегистрировался'});
+      res.status(201).json({message:'Пользователь успешно зарегистрирован'});
 
     } catch (e) {
       res.status(500).json({message : 'Что-то пошло не так, попробуйте снова'});
@@ -55,7 +50,6 @@ router.post(
       if (!errors.isEmpty()) return res.status(400).json({errors: errors.array(), message: "Некорректные данные при входе в систему"});
       
       const {email,password} = req.body;
-      console.log(email);
       const user = await User.findOne({email});
       if (!user) return res.status(400).json({message:'Пользователь не найден'});
 
@@ -68,7 +62,6 @@ router.post(
         { expiresIn: '1h'} 
       );    
        
-      console.log(token);
       res.json({token, userId: user.id});
     } catch (e) {
       console.log(e.message);
