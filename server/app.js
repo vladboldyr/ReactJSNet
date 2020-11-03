@@ -1,16 +1,14 @@
-const next = require('next');
+
 const express = require('express');
 const config = require('config');
 //const {createProxyMiddleware } = require('http-proxy-middleware');
 const dev = process.env.NODE_ENV !== 'production';
-const nextApp = next({dev});
-const handle = nextApp.getRequestHandler();
 const mongoose = require('mongoose');
 
 
 
 
-nextApp.prepare().then(() => {
+//nextApp.prepare().then(() => {
 const app = express();
 
 app.use(express.json({extended:true}));
@@ -22,7 +20,7 @@ app.use(function(req, res, next) {
   next();
 });
 app.use("/api/auth", require('./routes/auth.routes'));
-const PORT = config.get('port') || 3000;
+const PORT = config.get('port') || 5000;
 
  /*  app.use(
     createProxyMiddleware( '/api',{
@@ -65,6 +63,6 @@ connection.once("open", function() {
   console.log("MongoDB database connection established successfully");
 });
 
-}).catch(err => {
+/* }).catch(err => {
   console.log('Error:::::', err);
-})
+}) */

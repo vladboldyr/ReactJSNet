@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react"
 
 const storageName = 'userData'; 
@@ -8,7 +7,7 @@ export const useAuth = () => {
   const [userId, setUserId] = useState(null);
   const [isAuthenticated,setAuthenticated] = useState(false);
 
-  const login = useCallback((jwtToken,id)=>{
+  const login = useCallback((jwtToken:string,id:string)=>{
     //debugger;
     setToken(jwtToken);
     setUserId(id);

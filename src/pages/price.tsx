@@ -1,9 +1,7 @@
-import MainLayout from '../components/MainLayout/MainLayout';
+import React from 'react';
 import Price from '../components/Price/Price';
 export default function Index(){
   return (
-    <MainLayout title={'Price'}> 
       <Price/>
-    </MainLayout>
   )
 }

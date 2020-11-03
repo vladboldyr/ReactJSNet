@@ -1,14 +1,14 @@
-import React, { useState,useEffect } from 'react';
+import React, { MouseEvent,useState,useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import DataTable from 'react-data-table-component';
 
-import styles from './price.module.scss';
+import './price.scss';
 
-interface Row {
+type Row = {
   id: number;
   name: string;
   cost: number;
-}
+};
 
 const customStyles = {
   rows: {
@@ -72,9 +72,9 @@ const priceForPrimaryProcedure = [
     { id: 11, name: 'Глубокое бикини', cost: 750}
 ];
 
-const procedureFullLegs:Row = price.filter(element => element.name === 'Ноги полностью').pop();
-const procedureDeepBikini:Row = price.filter(element => element.name === 'Глубокое бикини').pop();
-const procedureShins:Row = price.filter(element => element.name === 'Голени').pop();
+const procedureFullLegs:Row = price.filter((element: Row) => element.name === 'Ноги полностью').pop() || {} as Row;
+const procedureDeepBikini:Row = price.filter((element: Row) => element.name === 'Глубокое бикини').pop() || {} as Row;
+const procedureShins:Row = price.filter((element: Row) => element.name === 'Голени').pop() || {} as Row;
 
 
 export default function Price() {
@@ -84,7 +84,7 @@ export default function Price() {
   const [secondComplexProcedure,setSecondComplexProcedure] = useState(false);
   const [costOfTheProcedure, changeCostOfTheProcedure] = useState(0);
 
-  const addFirstPriceOfTheProcedure = e => {
+  const addFirstPriceOfTheProcedure = (e:React.ChangeEvent<HTMLInputElement>) => {
     setFirstComplexProcedure(!firstComplexProcedure);
     if (!e.target.checked) {
       selectedRows.delete(procedureFullLegs);
@@ -98,7 +98,7 @@ export default function Price() {
     }
   }
 
-  const addSecondPriceOfTheProcedure = e => {
+  const addSecondPriceOfTheProcedure = (e:React.ChangeEvent<HTMLInputElement>) => {
     setSecondComplexProcedure(!secondComplexProcedure);
     if (!e.target.checked) {
       selectedRows.delete(procedureShins);
@@ -112,16 +112,16 @@ export default function Price() {
     }
   }
   function countCostOfThePrimaryProcedure(): number {
-    let rows = []; 
+    let rows:Row[] = []; 
     selectedRows.forEach(element => {
-      rows.push(priceForPrimaryProcedure.filter(primEl => primEl.name === element.name).pop());
+      rows.push(priceForPrimaryProcedure.filter((primEl:Row) => primEl.name === element.name).pop() || {} as Row);
     });
 
     return rows.reduce((sum,{cost}:{cost: number}) => sum + cost,0);
   }
 
   function countCostOfTheProcedure(): number {
-    let currentCost = 0;
+    let currentCost:number = 0;
     for (let row of selectedRows) {
       currentCost += row.cost;
     }
@@ -135,12 +135,12 @@ export default function Price() {
 
   const handleRowSelected = React.useCallback(state => {
     if (firstComplexProcedure) {
-      const currentSelectedTable = state.selectedRows.filter(element => element.name !== "Подмышечные впадины"); 
+      const currentSelectedTable = state.selectedRows.filter((element:Row) => element.name !== "Подмышечные впадины"); 
       const procedures = [...currentSelectedTable,procedureFullLegs,procedureDeepBikini]; 
       setSelectedRows(new Set([...procedures]));  
     }
     else if (secondComplexProcedure) {
-      const currentSelectedTable = state.selectedRows.filter(element => element.name !== "Подмышечные впадины"); 
+      const currentSelectedTable = state.selectedRows.filter((element:Row) => element.name !== "Подмышечные впадины"); 
       const procedures = [...currentSelectedTable,procedureShins,procedureDeepBikini]; 
       setSelectedRows(new Set([...procedures])); 
     }
@@ -152,7 +152,7 @@ export default function Price() {
   return( 
     <div>
       <div>РАССЧИТАЙТЕ СТОИМОСТЬ ШУГАРИНГА</div>
-      <div className={styles.wrapper__table}>
+      <div className="wrapper__table">
         <DataTable
             columns={columns}
             data={price}
@@ -165,29 +165,29 @@ export default function Price() {
             onSelectedRowsChange={handleRowSelected}
           />
       </div>
-      <div className={styles.wrapper__costForComplexProcedure}>
+      <div className="wrapper__costForComplexProcedure">
         <h4 style={{display:'flex'}}>Комплексы</h4>
-        <label className={styles.label__costProcedure}>
-          <input type="checkbox" onClick={addFirstPriceOfTheProcedure} defaultChecked={false}/>
-            <span className={styles.span__costProcedure}>
-              <h5 className={styles.span__costProcedure__text}>
+        <label className="label__costProcedure">
+          <input type="checkbox" onChange={addFirstPriceOfTheProcedure} defaultChecked={false}/>
+            <span className="span__costProcedure">
+              <h5 className="span__costProcedure__text">
                     {procedureFullLegs.name + "+" + procedureDeepBikini.name }{"(подмышечные впадины в подарок) "}
                     {procedureFullLegs.cost + procedureDeepBikini.cost}{" руб."}
               </h5>
           </span>
         </label>
-        <label className={styles.label__costProcedure}>
-          <input type="checkbox" onClick={addSecondPriceOfTheProcedure} defaultChecked={false}/>
-            <span className={styles.span__costProcedure}>
-              <h5 className={styles.span__costProcedure__text}>
+        <label className="label__costProcedure">
+          <input type="checkbox" onChange={addSecondPriceOfTheProcedure} defaultChecked={false}/>
+            <span className="span__costProcedure">
+              <h5 className="span__costProcedure__text">
                     {procedureShins.name + "+" + procedureDeepBikini.name }{"(подмышечные впадины в подарок) "}
                     {procedureShins.cost + procedureDeepBikini.cost}{" руб."}
               </h5>
           </span>
         </label>
-        <label className={styles.label__costProcedure}>
+        <label className="label__costProcedure">
           <input type="checkbox" defaultChecked={false} onClick={()=> setPrimaryProcedure(!primaryProcedure)}/>
-            <h4 className={styles.span__costProcedure__text}>{"Первичная процедура(после бритвы)"}</h4>
+            <h4 className="span__costProcedure__text">{"Первичная процедура(после бритвы)"}</h4>
         </label>
       </div>
       <div>

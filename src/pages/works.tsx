@@ -1,10 +1,11 @@
-import MainLayout from '../components/MainLayout/MainLayout';
+import React from 'react';
+
 
 const Works = () => {
     return(
-      <MainLayout title={'Работы'}>
+     /*  <MainLayout> */
         <div>Works</div>
-      </MainLayout>
+      /* </MainLayout> */
    );
 }
 

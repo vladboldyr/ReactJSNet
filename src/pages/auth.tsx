@@ -1,13 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
+import React,{ useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
 import { useMessage } from '../hooks/message.hook';
-
+import 'materialize-css';
 //TODO найти нормальное решение...
-if (typeof window !== 'undefined') {
+/* if (typeof window !== 'undefined') {
   require( '../../node_modules/materialize-css/dist/css/materialize.min.css');
   require('../../node_modules/materialize-css/dist/js/materialize.min.js');
-}
+} */
 
 const AuthPage = () => {
   const auth = useContext(AuthContext);
@@ -15,7 +15,7 @@ const AuthPage = () => {
   const {loading,error,request,clearError} = useHttp(); 
   const [form, setForm] = useState({email: '', password: ''});
 
-  const changeHandler = event => {
+  const changeHandler = (event:React.ChangeEvent<HTMLInputElement>) => {
     setForm({...form,[event.target.name] : event.target.value });
   }
 

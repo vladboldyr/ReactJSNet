@@ -1,14 +1,14 @@
 import React, {Component,Fragment, useState,useEffect, createRef} from 'react';
 import DatePicker from "react-datepicker/dist/react-datepicker.min";
-import  "react-datepicker/dist/react-datepicker-cssmodules.min.css"
-import  "react-datepicker/dist/react-datepicker.min.css";
-import M, { Dropdown } from "materialize-css";
-import "./modal.css";
+import "react-datepicker/dist/react-datepicker-cssmodules.min.css"
+import "react-datepicker/dist/react-datepicker.min.css";
+import M from "materialize-css";
 import ru from "date-fns/locale/ru"
 import setMinutes from "date-fns/setMinutes";
 import setHours from "date-fns/setHours";
 import {registerLocale} from "react-datepicker";
 import Select from 'react-select';
+import "./modal.css";
 
 registerLocale("ru", ru);
 

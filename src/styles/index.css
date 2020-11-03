@@ -4,9 +4,7 @@
 body {
     font-family: "Roboto", sans-serif;
 }
-#__next-prerender-indicator {
-  display: none;
-}
+
 /* input [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
   opacity: 1 !important;
 } */

@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
-import style from './MainLayout.module.scss';
+import React, { ReactNode, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import './MainLayout.scss';
 
 const imgSugar = '/icons/sugar.png';
 const authentication = '/icons/authentication.svg';
 const insta = '/icons/instagram.svg';
 const vk = '/icons/vk.svg';
 
-export const MainLayout = ({children, title = ' Sugar'}) => {
+interface IProps {
+  children: ReactNode;
+}
+export const MainLayout = ({children}:IProps/* {children, title = ' Sugar'} */) => {
     const [activeMenu,isActiveMenu] = useState(false);
     const clickBurger = () => {
         isActiveMenu(!activeMenu);
@@ -16,48 +18,42 @@ export const MainLayout = ({children, title = ' Sugar'}) => {
     }
     return(
       <>
-        <Head>
+        {/* <Head>
           <title>{title} | SugarPro Studio</title>
-        </Head>
-        <div className={style.wrapper}>
-          <header className={style.sugarHeader}>
-            <div className={style.container}>
-                <div className={style.sugarHeader__body}>
-                    <Link href="/">
-                      <a className={style.sugarHeader__logo}>
+        </Head> */}
+        <div className="wrapper">
+          <header className="sugarHeader">
+            <div className="container">
+                <div className="sugarHeader__body">
+                    <NavLink to="/" className="sugarHeader__logo">
                         <img src={imgSugar}/>
-                        <span className={style.sugarHeader__start__brand}>SugarPro Studio</span>
-                      </a>
-                    </Link>
+                        <span className="sugarHeader__start__brand">SugarPro Studio</span>
+                    </NavLink>
                     <div 
-                         className={activeMenu ? [style.sugarHeader__burger,style.active].join('') : style.sugarHeader__burger} 
+                         className={activeMenu ? "sugarHeader__burger active" : "sugarHeader__burger"} 
                          onClick={()=> clickBurger()}
                       >
                         <span></span>
                     </div>
-                    <nav className={activeMenu ? [style.sugarHeader__burger,style.active].join('') : style.sugarHeader__menu}>
-                        <ul className={style.sugarHeader__list}>
-                            <li><Link href="/">О Студии</Link></li>
-                            <li><Link href="/price">Прайс</Link></li>
-                            <li><Link href="/works">Наши работы</Link></li>
-                            <li><Link href="/comments">Отзовы</Link></li>
-                            <li><Link href="/contacts">Контакты</Link></li>
+                    <nav className={activeMenu ? "sugarHeader__burger active" : "sugarHeader__menu"}>
+                        <ul className="sugarHeader__list">
+                            <li><NavLink to="/">О Студии</NavLink></li>
+                            <li><NavLink to="/price">Прайс</NavLink></li>
+                            <li><NavLink to="/works">Наши работы</NavLink></li>
+                            <li><NavLink to="/comments">Отзовы</NavLink></li>
+                            <li><NavLink to="/contacts">Контакты</NavLink></li>
                          </ul>
                     </nav>
-                    <div className={style.sugarHeader__contacts}>
-                        <div className={style.sugarHeader__contactsPhone}>
+                    <div className="sugarHeader__contacts">
+                        <div className="sugarHeader__contactsPhone">
                             <strong>+7 (908) 828-43-17</strong>
                         </div>
-                        <div className={style.sugarHeader__contactsLinksSN}>
-                            <Link href="https://www.instagram.com/lena_pushkina1/" passHref={true}>
-                                <a className={style.sugarHeader__linkInsta} target="_blank"><img src={insta}/></a>
-                            </Link>
-                            <Link href="https://vk.com/id167021275" passHref={true}>
-                                <a className={style.sugarHeader__linkInsta} target="_blank"><img src={vk}/></a>
-                            </Link>
+                        <div className="sugarHeader__contactsLinksSN">
+                                <a href="https://www.instagram.com/lena_pushkina1/" className="sugarHeader__linkInsta" target="_blank"><img src={insta}/></a>
+                                <a href="https://vk.com/id167021275" className="sugarHeader__linkInsta" target="_blank"><img src={vk}/></a>
                         </div>
                     </div>
-                    <div className={style.sugarHeader__end}>
+                    <div className="sugarHeader__end">
                       <a className="button" href="#">
                         <img src={authentication} alt="Авторизируйтесь"></img>
                       </a> 
@@ -65,8 +61,8 @@ export const MainLayout = ({children, title = ' Sugar'}) => {
                 </div>
             </div>
         </header>
-          <div className={style.content}>
-            <div className={style.content_text}>
+          <div className="content">
+            <div className="content_text">
               {children}
             </div>
           </div>

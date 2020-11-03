@@ -2,38 +2,60 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const path = require("path");
 const webpack = require("webpack");
-let development = process.env.NODE_ENV === 'development';
+const babelOptions = preset => {
+  const opts = {
+    presets: [
+      '@babel/preset-env'
+    ],
+    plugins: [
+      '@babel/plugin-proposal-class-properties'
+    ]
+  }
 
-//const extractCSS = new ExtractTextPlugin('./stylesheets/[name].css');
-//const extractLESS = new ExtractTextPlugin('./stylesheets/[name].less');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+  if (preset) {
+    opts.presets.push(preset)
+  }
+
+  return opts
+}
+
 
 module.exports = {
-    entry: ['@babel/polyfill',"./src/pages/index.tsx"],
+   context: path.resolve(__dirname, 'src'),
+    entry: {
+      main:['@babel/polyfill',"./index.jsx"]
+    },
     mode: "development",
     devtool: "source-map",
     module: {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
-                loader: "awesome-typescript-loader",
+                exclude: /node_modules/,
+                loader: "awesome-typescript-loader",//'babel-loader',"awesome-typescript-loader",
+                options: babelOptions('@babel/preset-typescript')
             },
             {
                 test: /\.(js|jsx)$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /node_modules/,
                 loader: "babel-loader",
-                query: {
+               /*  query: {
+                  presets: ['react', 'es2015','@babel/preset-react']
+                }, */
+               /*  query: {
                   presets: ['@babel/preset-react', '@babel/preset-env'],
                   plugins: ['@babel/proposal-class-properties']
-                },
-                //options: { presets: ["@babel/env"] }
+                }, */
+                options: babelOptions('@babel/preset-react')//{ presets: ["@babel/env",'react', 'es2015','@babel/preset-react'] }
             },
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
+                use: ["style-loader", "css-loader"],
+                exclude: [/node_modules/, /public/]
+                /* ExtractTextPlugin.extract({
                   fallback: "style-loader",
-                  use: "css-loader"
-                })/* ["style-loader", "css-loader"] */
+                  use: "css-loader" */
+                /* ["style-loader", "css-loader"] */
             },
             {
                 test: /\.less$/,
@@ -47,7 +69,8 @@ module.exports = {
                     {
                         loader: 'less-loader' // compiles Less to CSS
                     }
-                ]
+                ],
+                exclude: [/node_modules/, /public/]
             },
             {
               test: /\.(scss|sass)$/,
@@ -64,7 +87,8 @@ module.exports = {
                   {
                       loader: 'sass-loader' // compiles Sass to CSS
                   }
-              ]
+              ],
+              exclude: [/node_modules/, /public/]
           },
             {
                 test: /\.(png|svg|jpg|gif)$/,
@@ -73,8 +97,9 @@ module.exports = {
         ]
     },
     externals: {
-        jquery: 'jQuery',
-        react:'React'
+      jquery: 'jQuery',
+     /*  "react": "React",
+      "react-dom": "ReactDOM" */
     },
     resolve: {
         modules: [
@@ -82,8 +107,8 @@ module.exports = {
         ],
         extensions: ["*", ".js", ".jsx",".ts", ".tsx", ".css", ".scss"] },
     output: {
-        path: path.resolve(__dirname, "dist/"),
-        publicPath: "/dist/",
+        path: path.resolve(__dirname, "/public/dist/"),
+        publicPath: "/dist",
         filename: "bundle.js"
     },
     devServer: {
@@ -97,6 +122,8 @@ module.exports = {
             template: __dirname + "/public/index.html",
             inject: 'body'
         }),
-        new ExtractTextPlugin('[name].min.css')
+        new webpack.ProvidePlugin({
+          "React": "react",
+        }),
       ]
 };

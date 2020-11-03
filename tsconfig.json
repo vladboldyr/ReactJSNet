@@ -1,13 +1,13 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "jsx": "preserve",
+    "jsx": "react",
     "baseUrl": "./",
     "outDir": "./dist/",
     "sourceMap": true,
     "allowJs": true,
     "declaration": false,
-    "module": "commonjs",
+    "module": "esnext",
     "alwaysStrict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -16,6 +16,7 @@
     "experimentalDecorators": true,
     "downlevelIteration": true,
     "importHelpers": true,
+    "noImplicitAny":false,
     "target": "es2019",
     "typeRoots": [
       "./node_modules/@types"
@@ -25,15 +26,13 @@
       "dom"
     ],
     "skipLibCheck": true,
-    "strict": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "noEmit": true
   },
   "include": [
-    "/src/pages/index.tsx"
-  ],
-  "exclude": [
-    "node_modules"
+    "./src/index.jsx"
   ]
 }

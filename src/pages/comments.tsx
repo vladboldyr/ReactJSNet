@@ -1,10 +1,8 @@
-import MainLayout from '../components/MainLayout/MainLayout';
+import React from 'react';
 
 const Comments = () => {
   return(
-      <MainLayout title={'Отзывы'}>
         <div>Отзывы</div>
-      </MainLayout>
   );
 }
 
