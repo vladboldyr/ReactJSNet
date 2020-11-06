@@ -1,18 +1,13 @@
 {
-  "name": "spaproject",
+  "name": "mers-source",
   "version": "1.0.0",
   "description": "test",
-  "main": "/src/main.js",
+  "main": "server/app.js",
   "scripts": {
     "node_script": "node server/app.js",
     "server": "nodemon server/app.js",
-    "webpack-devserver": "webpack-dev-server --debug --hot --devtool eval-source-map --output-pathinfo --watch --colors --inline --content-base public --port 3000 --host 0.0.0.0",
-    "dev": "concurrently \"npm run client\" \"npm run server\"",
-    "client": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "jest",
-    "testWatch": "jest --watchAll",
-    "eject": "react-scripts eject"
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "repository": {
     "type": "git",
@@ -24,7 +19,6 @@
     "url": "https://github.com/vladboldyr/ReactJSNet/issues"
   },
   "homepage": "https://github.com/vladboldyr/ReactJSNet#readme",
-  "proxy": "http://localhost:5000",
   "resolutions": {
     "**/@babel/runtime": "7.5.0"
   },

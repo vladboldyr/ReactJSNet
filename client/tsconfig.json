@@ -33,6 +33,6 @@
     "noEmit": true
   },
   "include": [
-    "./src/index.jsx"
+    "./client/index.jsx"
   ]
 }

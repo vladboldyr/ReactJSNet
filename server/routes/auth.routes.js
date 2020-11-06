@@ -61,8 +61,8 @@ router.post(
         config.get('jwtSecret'),
         { expiresIn: '1h'} 
       );    
-       
-      res.json({token, userId: user.id});
+
+      res.json({token, userId: user.id,message:"Успешно авторизован"});
     } catch (e) {
       console.log(e.message);
       res.status(500).json({message : 'Что-то пошло не так, попробуйте снова'});

@@ -21,7 +21,7 @@ const babelOptions = preset => {
 
 
 module.exports = {
-   context: path.resolve(__dirname, 'src'),
+   context: path.resolve(__dirname),
     entry: {
       main:['@babel/polyfill',"./index.jsx"]
     },
@@ -115,7 +115,13 @@ module.exports = {
         contentBase: path.join(__dirname, "public/"),
         port: 3000,
         publicPath: "http://localhost:3000/dist/",
-        hotOnly: true
+        hotOnly: true,
+        historyApiFallback: true,
+        proxy: {
+          '/api': {
+            target: 'http://localhost:5000'
+          },
+        }
     },
     plugins: [new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({

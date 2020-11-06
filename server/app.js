@@ -8,7 +8,6 @@ const mongoose = require('mongoose');
 
 
 
-//nextApp.prepare().then(() => {
 const app = express();
 
 app.use(express.json({extended:true}));
@@ -33,10 +32,10 @@ const PORT = config.get('port') || 5000;
     require('./routes/auth.routes')
   ); */
 
-
+/* 
 app.all('*', (req, res) => {
   return handle(req, res)
-})
+}) */
 
 const localUri = "mongodb://127.0.0.1:27017/test";
 var db ={};
@@ -63,6 +62,4 @@ connection.once("open", function() {
   console.log("MongoDB database connection established successfully");
 });
 
-/* }).catch(err => {
-  console.log('Error:::::', err);
-}) */
+

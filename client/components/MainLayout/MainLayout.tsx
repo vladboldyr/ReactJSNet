@@ -54,9 +54,9 @@ export const MainLayout = ({children}:IProps/* {children, title = ' Sugar'} */) 
                         </div>
                     </div>
                     <div className="sugarHeader__end">
-                      <a className="button" href="#">
+                      <NavLink className="button" to='/auth'>
                         <img src={authentication} alt="Авторизируйтесь"></img>
-                      </a> 
+                      </NavLink> 
                     </div>
                 </div>
             </div>

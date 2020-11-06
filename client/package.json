@@ -1,0 +1,61 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "@types/react": "^16.9.55",
+    "@types/react-dom": "^16.9.9",
+    "@types/uuid": "^8.3.0",
+    "css-loader": "^1.0.1",
+    "file-loader": "^1.1.6",
+    "jest": "^24.9.0",
+    "sass": "^1.28.0",
+    "sass-loader": "^10.0.4",
+    "source-map-loader": "^1.1.2",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^8.0.7",
+    "typescript": "^4.0.5",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "materialize-css": "^1.0.0-rc.2",
+    "react": "^16.14.0",
+    "react-data-table-component": "^6.11.5",
+    "react-datepicker": "^3.3.0",
+    "react-dom": "^16.14.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "^3.4.4",
+    "react-select": "^3.1.0",
+    "react-test-renderer": "^16.14.0",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "styled-components": "^5.2.1",
+    "switch": "0.0.0",
+    "uuid": "^8.3.1"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --debug --hot --devtool eval-source-map --output-pathinfo --watch --colors --inline --content-base public --port 3000 --host 0.0.0.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
