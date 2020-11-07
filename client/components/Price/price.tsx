@@ -1,7 +1,6 @@
 import React, { MouseEvent,useState,useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import DataTable from 'react-data-table-component';
-
 import './price.scss';
 
 type Row = {

@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const path = require("path");
 const webpack = require("webpack");
@@ -31,31 +32,21 @@ module.exports = {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
-                exclude: /node_modules/,
+                //exclude: /node_modules/,
                 loader: "awesome-typescript-loader",//'babel-loader',"awesome-typescript-loader",
                 options: babelOptions('@babel/preset-typescript')
             },
             {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
+                test: /\.js$|jsx/,
+                //exclude: /node_modules/,
                 loader: "babel-loader",
-               /*  query: {
-                  presets: ['react', 'es2015','@babel/preset-react']
-                }, */
-               /*  query: {
-                  presets: ['@babel/preset-react', '@babel/preset-env'],
-                  plugins: ['@babel/proposal-class-properties']
-                }, */
-                options: babelOptions('@babel/preset-react')//{ presets: ["@babel/env",'react', 'es2015','@babel/preset-react'] }
+                options: babelOptions('@babel/preset-react')
             },
             {
                 test: /\.css$/,
-                use: ["style-loader", "css-loader"],
-                exclude: [/node_modules/, /public/]
-                /* ExtractTextPlugin.extract({
-                  fallback: "style-loader",
-                  use: "css-loader" */
-                /* ["style-loader", "css-loader"] */
+                include: /node_modules/, 
+                use: [MiniCssExtractPlugin.loader, 'style-loader',"css-loader"],
+                //exclude: [/public/]
             },
             {
                 test: /\.less$/,
@@ -74,6 +65,7 @@ module.exports = {
             },
             {
               test: /\.(scss|sass)$/,
+              //include: /node_modules/, 
               use: [
                   {
                       loader: 'style-loader'
@@ -85,10 +77,17 @@ module.exports = {
                     loader: "css-modules-typescript-loader"
                   }, 
                   {
-                      loader: 'sass-loader' // compiles Sass to CSS
+                      loader:'sass-loader' // compiles Sass to CSS
+                     /*  options: {
+                        importLoaders: 1,
+                        modules: {
+                            localIdentName: "[name]__[local]___[hash:base64:5]",
+                        }			 					
+                    }*/
+
                   }
               ],
-              exclude: [/node_modules/, /public/]
+              exclude: [/public/]
           },
             {
                 test: /\.(png|svg|jpg|gif)$/,
@@ -98,8 +97,6 @@ module.exports = {
     },
     externals: {
       jquery: 'jQuery',
-     /*  "react": "React",
-      "react-dom": "ReactDOM" */
     },
     resolve: {
         modules: [
@@ -128,8 +125,10 @@ module.exports = {
             template: __dirname + "/public/index.html",
             inject: 'body'
         }),
+        new MiniCssExtractPlugin()
+        /* ,
         new webpack.ProvidePlugin({
           "React": "react",
-        }),
+        }), */
       ]
 };

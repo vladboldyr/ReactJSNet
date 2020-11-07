@@ -1,16 +1,32 @@
-import React,{ useContext, useEffect, useState } from 'react';
+import React,{ useContext, useEffect, useState, } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
 import { useMessage } from '../hooks/message.hook';
-import 'materialize-css';
-//TODO найти нормальное решение...
-/* if (typeof window !== 'undefined') {
+import { useHistory } from "react-router-dom";
+//import M from 'materialize-css';
+//import '../../node_modules/materialize-css/dist/css/materialize.min.css';
+//import '../../node_modules/materialize-css/dist/js/materialize.min.js';
+/* import 'materialize-css/dist/css/materialize.min.css'
+import 'materialize-css/dist/js/materialize.min.js'
+import '../node_modules/materialize-css/dist/css/materialize.min.css';
+import '../../node_modules/materialize-css/dist/js/materialize.min.js'; */
+
+//import '../styles/auth.css';
+
+ /* if (typeof window !== 'undefined') {
   require( '../../node_modules/materialize-css/dist/css/materialize.min.css');
   require('../../node_modules/materialize-css/dist/js/materialize.min.js');
 } */
 
+// declare global {
+//   interface Window {
+//       M:M;
+//   }
+// }
+
 const AuthPage = () => {
   const auth = useContext(AuthContext);
+  const history = useHistory();
   const message = useMessage();
   const {loading,error,request,clearError} = useHttp(); 
   const [form, setForm] = useState({email: '', password: ''});
@@ -18,6 +34,9 @@ const AuthPage = () => {
   const changeHandler = (event:React.ChangeEvent<HTMLInputElement>) => {
     setForm({...form,[event.target.name] : event.target.value });
   }
+  useEffect(()=>{
+    //window.M.updateTextFields()
+  },[]);
 
   useEffect(()=> {
     message(error);
@@ -38,7 +57,7 @@ const AuthPage = () => {
 
         const data = await request('/api/auth/login','POST', {...form});
         auth.login(data.token, data.userId);
-        message(data.message);
+        history.push("/");
       } catch (e) {
 
       }
