@@ -4,8 +4,9 @@ import { useHttp } from '../hooks/http.hook';
 import { useMessage } from '../hooks/message.hook';
 import { useHistory } from "react-router-dom";
 //import M from 'materialize-css';
-//import '../../node_modules/materialize-css/dist/css/materialize.min.css';
-//import '../../node_modules/materialize-css/dist/js/materialize.min.js';
+import styles from '../styles/auth.module.sass';
+//const materializeCSS = require( '../node_modules/materialize-css/dist/css/materialize.min.css');
+//const mat = require( '../node_modules/materialize-css/dist/js/materialize.min.js');
 /* import 'materialize-css/dist/css/materialize.min.css'
 import 'materialize-css/dist/js/materialize.min.js'
 import '../node_modules/materialize-css/dist/css/materialize.min.css';
@@ -13,10 +14,10 @@ import '../../node_modules/materialize-css/dist/js/materialize.min.js'; */
 
 //import '../styles/auth.css';
 
- /* if (typeof window !== 'undefined') {
-  require( '../../node_modules/materialize-css/dist/css/materialize.min.css');
-  require('../../node_modules/materialize-css/dist/js/materialize.min.js');
-} */
+// if (typeof window !== 'undefined') {
+//   require( '../node_modules/materialize-css/dist/css/materialize.min.css');
+//   require('../node_modules/materialize-css/dist/js/materialize.min.js');
+// } 
 
 // declare global {
 //   interface Window {

@@ -45,7 +45,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 include: /node_modules/, 
-                use: [MiniCssExtractPlugin.loader, 'style-loader',"css-loader"],
+                use: [/*MiniCssExtractPlugin.loader,*/ 'style-loader',"css-loader"],
                 //exclude: [/public/]
             },
             {
@@ -125,7 +125,7 @@ module.exports = {
             template: __dirname + "/public/index.html",
             inject: 'body'
         }),
-        new MiniCssExtractPlugin()
+        //new MiniCssExtractPlugin()
         /* ,
         new webpack.ProvidePlugin({
           "React": "react",
