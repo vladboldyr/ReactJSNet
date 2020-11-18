@@ -32,21 +32,20 @@ module.exports = {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
-                //exclude: /node_modules/,
+                exclude: /node_modules/,
                 loader: "awesome-typescript-loader",//'babel-loader',"awesome-typescript-loader",
                 options: babelOptions('@babel/preset-typescript')
             },
             {
                 test: /\.js$|jsx/,
-                //exclude: /node_modules/,
+                exclude: /node_modules/,
                 loader: "babel-loader",
                 options: babelOptions('@babel/preset-react')
             },
             {
                 test: /\.css$/,
-                include: /node_modules/, 
                 use: [MiniCssExtractPlugin.loader, 'style-loader',"css-loader"],
-                //exclude: [/public/]
+                exclude: [/public/,/node_modules/]
             },
             {
                 test: /\.less$/,
@@ -87,7 +86,7 @@ module.exports = {
 
                   }
               ],
-              exclude: [/public/]
+              exclude: [/node_modules/,/public/]
           },
             {
                 test: /\.(png|svg|jpg|gif)$/,
