@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+      width:'100%',
       height:'100%',
     },
     paper: {
@@ -64,13 +65,14 @@ const AuthPage = () => {
       <Grid container
             direction="row"
             justify="center"
-            spacing={3}
+            spacing={1}
             alignItems="flex-start" 
             style={{width:"100%",height:"100%"}}>
-        <Grid item xs={12}>
+        <Grid item xs={4}>
           <Paper elevation={5} style={{width:"100%",height:"100%"}}>
-            <form  noValidate autoComplete="off">
+            <form  noValidate autoComplete="off" style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:'column'}}>
               <TextField id="standard-basic" label="Login" />
+              <TextField id="standard-basic" label="Password" type="password" />
             </form>
           </Paper>
         </Grid>
