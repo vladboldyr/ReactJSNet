@@ -34,6 +34,10 @@ export const useRoutes = isAuthenticated => {
   return (
       <Switch>
         <AppRoute path={'/'} exact layout={MainLayout} component={Home}/>
+        <AppRoute path={'/price'} exact layout={MainLayout} component={Price}/>
+        <AppRoute path={'/commetns'} layout={MainLayout} component={Comments}/>
+        <AppRoute path={'/works'}  layout={MainLayout} component={Works}/>
+        <AppRoute path={'/contacts'}  layout={MainLayout} component={Contacts}/>
         <Route path={'/auth'}  component={Auth}/>
         <Redirect to='/'/>
       </Switch>

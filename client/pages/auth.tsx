@@ -3,28 +3,25 @@ import { AuthContext } from '../context/AuthContext';
 import { useHttp } from '../hooks/http.hook';
 import { useMessage } from '../hooks/message.hook';
 import { useHistory } from "react-router-dom";
-//import M from 'materialize-css';
-//import '../../node_modules/materialize-css/dist/css/materialize.min.css';
-//import '../../node_modules/materialize-css/dist/js/materialize.min.js';
-/* import 'materialize-css/dist/css/materialize.min.css'
-import 'materialize-css/dist/js/materialize.min.js'
-import '../node_modules/materialize-css/dist/css/materialize.min.css';
-import '../../node_modules/materialize-css/dist/js/materialize.min.js'; */
+import {  makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import {Grid, Paper, TextField} from '@material-ui/core';
 
-//import '../styles/auth.css';
-
- /* if (typeof window !== 'undefined') {
-  require( '../../node_modules/materialize-css/dist/css/materialize.min.css');
-  require('../../node_modules/materialize-css/dist/js/materialize.min.js');
-} */
-
-// declare global {
-//   interface Window {
-//       M:M;
-//   }
-// }
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+      height:'100%',
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    },
+  }),
+);
 
 const AuthPage = () => {
+  const classes = useStyles();
   const auth = useContext(AuthContext);
   const history = useHistory();
   const message = useMessage();
@@ -63,7 +60,25 @@ const AuthPage = () => {
       }
     }
   return (
-    <div className="row">
+    <div className={classes.root}>
+      <Grid container
+            direction="row"
+            justify="center"
+            spacing={3}
+            alignItems="flex-start" 
+            style={{width:"100%",height:"100%"}}>
+        <Grid item xs={12}>
+          <Paper elevation={5} style={{width:"100%",height:"100%"}}>
+            <form  noValidate autoComplete="off">
+              <TextField id="standard-basic" label="Login" />
+            </form>
+          </Paper>
+        </Grid>
+      </Grid>
+    </div>
+  );
+}
+    /* <div className="row">
       <div className="col s6 offset-s3">
         <div className="card blue darken-1">
           <div className="card-content white-text">
@@ -95,8 +110,7 @@ const AuthPage = () => {
           </div>
       </div>
       </div>
-    </div>
-  );
-}
+    </div> */
+
 
 export default AuthPage;
