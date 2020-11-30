@@ -70,9 +70,9 @@ const AuthPage = () => {
             style={{width:"100%",height:"100%"}}>
         <Grid item xs={4}>
           <Paper elevation={5} style={{width:"100%",height:"100%"}}>
-            <form  noValidate autoComplete="off" style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:'column'}}>
-              <TextField id="standard-basic" label="Login" />
-              <TextField id="standard-basic" label="Password" type="password" />
+            <form  noValidate autoComplete="off" style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:'column',paddingBottom:'10px'}}>
+              <TextField id="standard-basic" label="Login" style={{margin:"10px 0 10px 0"}}/>
+              <TextField id="standard-basic" label="Password" type="password" style={{margin:"10px 0 10px 0"}}/>
             </form>
           </Paper>
         </Grid>
