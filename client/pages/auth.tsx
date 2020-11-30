@@ -5,6 +5,7 @@ import { useMessage } from '../hooks/message.hook';
 import { useHistory } from "react-router-dom";
 import {  makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import {Grid, Paper, TextField} from '@material-ui/core';
+import '../styles/auth.scss';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,9 +33,6 @@ const AuthPage = () => {
   const changeHandler = (event:React.ChangeEvent<HTMLInputElement>) => {
     setForm({...form,[event.target.name] : event.target.value });
   }
-  useEffect(()=>{
-    //window.M.updateTextFields()
-  },[]);
 
   useEffect(()=> {
     message(error);
@@ -66,13 +64,18 @@ const AuthPage = () => {
             direction="row"
             justify="center"
             spacing={1}
-            alignItems="flex-start" 
-            style={{width:"100%",height:"100%"}}>
+            alignItems="flex-start">
         <Grid item xs={4}>
-          <Paper elevation={5} style={{width:"100%",height:"100%"}}>
-            <form  noValidate autoComplete="off" style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:'column',paddingBottom:'10px'}}>
-              <TextField id="standard-basic" label="Login" style={{margin:"10px 0 10px 0"}}/>
-              <TextField id="standard-basic" label="Password" type="password" style={{margin:"10px 0 10px 0"}}/>
+          <Paper elevation={5}>
+            <form  noValidate autoComplete="off" className="form__authorization">
+              <TextField  id="standard-basic" label="Логин" className="form__authorizationTextField"/>
+              <TextField 
+                  //error
+                  //helperText="Incorrect entry."
+                  id="standard-basic"
+                  label="Пароль"
+                  type="password"
+                  className="form__authorizationTextField"/>
             </form>
           </Paper>
         </Grid>
